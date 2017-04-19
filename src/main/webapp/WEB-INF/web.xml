@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
+         
+    <display-name>StreamMars</display-name>
+    
+    <description>StreamMarsFramework</description>
+
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>webapp</param-value>
+    </context-param>
+
+    <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/applicationContext*.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+    </listener>
+
+    <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <servlet>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/springmvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <url-pattern>/action/*</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- 登录首页 -->
+    <welcome-file-list>
+        <welcome-file>main.html</welcome-file>
+    </welcome-file-list>
+    
+    <!--  访问出错跳转页面 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error/403.html</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error/401.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500.html</location>
+    </error-page>
+
+    <mime-mapping>
+        <extension>wsdl</extension>
+        <mime-type>text/xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xsl</extension>
+        <mime-type>text/xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xsd</extension>
+        <mime-type>text/xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>msi</extension>
+        <mime-type>application/x-msdownload</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xpi</extension>
+        <mime-type>application/x-xpinstall</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xls</extension>
+        <mime-type>application/excel</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>doc</extension>
+        <mime-type>application/msword</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>pdf</extension>
+        <mime-type>application/pdf</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>zip</extension>
+        <mime-type>application/zip</mime-type>
+    </mime-mapping>
+        <mime-mapping>
+        <extension>rar</extension>
+    <mime-type>application/rar</mime-type>
+    </mime-mapping>
+        <mime-mapping>
+        <extension>txt</extension>
+    <mime-type>application/txt</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>chm</extension>
+        <mime-type>application/mshelp</mime-type>
+    </mime-mapping>
+</web-app>
+
