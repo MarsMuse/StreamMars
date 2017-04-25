@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.35/e999451962786feb0c12d0828db80519c6506a59/mysql-connector-java-5.1.35-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.35/b6ac941b7288376a7e8bc6490264bbd4427fb94e/mysql-connector-java-5.1.35.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/javax.servlet/servlet-api/2.5/21599814ad9a605b86f3e6381571beccd861a32/servlet-api-2.5-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/javax.servlet/servlet-api/2.5/5959582d97d8b61f4d154ca9e495aafd16726e34/servlet-api-2.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-aop/4.2.0.RELEASE/e36e1b61e777d1b45e396fc2e69a13708cbef817/spring-aop-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-aop/4.2.0.RELEASE/59d0f2975b818859872211e219b0141d12843547/spring-aop-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-aspects/4.2.0.RELEASE/725da8ae1fc82402e547c95a643eb02d4bfb54c9/spring-aspects-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-aspects/4.2.0.RELEASE/78bd187f63927dd40b5c0e3513b376c7aadc3114/spring-aspects-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-beans/4.2.0.RELEASE/4e2a13469a30fac0efed7c4a5b3217afcf9b5433/spring-beans-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-beans/4.2.0.RELEASE/3f3b38ccca8b5fa19a667e3c54c410ee404a39f0/spring-beans-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-context/4.2.0.RELEASE/509a011d16523f8b4c840783ea621ef478f95a68/spring-context-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-context/4.2.0.RELEASE/4c935619d8a74bdc4b11be71411ad6d629b3c2df/spring-context-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-context-support/4.2.0.RELEASE/1682698c61359f1f305e2be80832a8e1a7f934ba/spring-context-support-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-context-support/4.2.0.RELEASE/c11b7f640372d10006f3c743b845201c0c201375/spring-context-support-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-core/4.2.0.RELEASE/699226901b379075311a66102aaa8e8f6b34640c/spring-core-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-core/4.2.0.RELEASE/9c807aff0032dea05dcc17a477f2442139671ed7/spring-core-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.0.RELEASE/7c6fbbc85356c16189ab55dd45ce8b661fb256ad/spring-expression-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.0.RELEASE/d578e5f975bd92de55a75e0865c0a0aca75e1b87/spring-expression-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.2.0.RELEASE/eeb10c96bb6e50b9e015e62f322845c39e5745f7/spring-jdbc-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.2.0.RELEASE/d3f0ec4d8c924b6b4325607f30909e527a87388d/spring-jdbc-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-orm/4.2.0.RELEASE/89631f62f1e920eaf12697d88af8b528615d4ec1/spring-orm-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-orm/4.2.0.RELEASE/ac169299c99454463321b2043dbbb7e497efc660/spring-orm-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-oxm/4.2.0.RELEASE/56b657e4448e79cc9bf831f8dbe60adf9c4a13a7/spring-oxm-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-oxm/4.2.0.RELEASE/90f3a6a2df0183d1101c7a618c26db9837184da/spring-oxm-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-tx/4.2.0.RELEASE/50990631d71f61fc968707581e6e460193767538/spring-tx-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-tx/4.2.0.RELEASE/6dcd7790b53d88077947dce524ee501e30f8d39f/spring-tx-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-web/4.2.0.RELEASE/e7159959bff402d762c94c245bdabd254990b74f/spring-web-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-web/4.2.0.RELEASE/b21f7dfe6145ebe1ce6cd5d8853cceacf42e3380/spring-web-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.2.0.RELEASE/b2a2c117ef67152537a93ec1e6f9f8c763f67059/spring-webmvc-4.2.0.RELEASE-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.2.0.RELEASE/158244f0d8f79654fa7860385fd3865db6f006ef/spring-webmvc-4.2.0.RELEASE.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.7/15a62dbee75aadf62b7d35640533262d764b29d3/logback-core-1.1.7-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.7/7873092d39ef741575ca91378a6a21c388363ac8/logback-core-1.1.7.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.7/6cfaf5c02fb50bfdf7ea5e563955d3c229d7e154/logback-classic-1.1.7-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.7/9865cf6994f9ff13fce0bf93f2054ef6c65bb462/logback-classic-1.1.7.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-access/1.1.7/801c124584fec383607a5765c6ef013c2d8d0a4b/logback-access-1.1.7-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/ch.qos.logback/logback-access/1.1.7/377d40b529ed9d7ae2d7056e5f735211f0c01bd3/logback-access-1.1.7.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.0/3016ffd7d9d008bf6b230d01de711f9da046d68e/mybatis-3.4.0-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.0/1b37a54d8ab403e56cb3ed717c25193474efa226/mybatis-3.4.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.3.0/2022be53ff19021a08c89fe58d52fdb28c654e75/mybatis-spring-1.3.0-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.3.0/d1dbdc46cac543447ffd5aeda59f1a9bb34f0912/mybatis-spring-1.3.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.8/40edefae16a3421290778894ef3a71aba0a5a224/jcl-over-slf4j-1.7.8-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.8/c255c29d154eb7d6f0e34f9e04e653b00019cd42/jcl-over-slf4j-1.7.8.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.quartz-scheduler/quartz/2.2.1/4e9e3085eb99c52dc368d144bd3bc61e7aab87ad/quartz-2.2.1-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.quartz-scheduler/quartz/2.2.1/2bd17ec0c66d0370a932e225f52c23f3dc7cc4ce/quartz-2.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.quartz-scheduler/quartz-jobs/2.2.1/1eea115fce1c9c235208556dbc381d8c86ffa328/quartz-jobs-2.2.1-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.quartz-scheduler/quartz-jobs/2.2.1/b86d51a88bc8ea66b130a93d877a2ae9c6e47c1b/quartz-jobs-2.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-dbcp/commons-dbcp/1.4/9b076ff231434d5403be6599a1347019b12c0def/commons-dbcp-1.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-dbcp/commons-dbcp/1.4/30be73c965cc990b153a100aaaaafcf239f82d39/commons-dbcp-1.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-spring/1.4.0-RC2/bba9de3a2b047d21f8ec145abc5de0460a8b7c1d/shiro-spring-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-spring/1.4.0-RC2/ee2478df4e78cb9196a235f8ce730763bb2c4094/shiro-spring-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-ehcache/1.4.0-RC2/b61edcb45d307d8fdb1d70d484aedc51b45e8e5e/shiro-ehcache-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-ehcache/1.4.0-RC2/531ecc69f157e59e4cb24315499aa02bb17928e4/shiro-ehcache-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/com.alibaba/druid/1.0.15/5ac80379ac2fb7412b9239751b68b953892baa80/druid-1.0.15-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/com.alibaba/druid/1.0.15/6a84f94a0dafe1f7912e90961de029d9bb3c7807/druid-1.0.15.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-net/commons-net/3.3/ccfa0721eae567b3c47cfaf3cca20e2491362bf6/commons-net-3.3-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-net/commons-net/3.3/cd0d5510908225f76c5fe5a3f1df4fa44866f81e/commons-net-3.3.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.2/b9f9e3e5255b6ddc3bf21be05428c7a60d00e042/httpclient-4.5.2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.2/733db77aa8d9b2d68015189df76ab06304406e50/httpclient-4.5.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.4/fe8825e43af137edc12f7b54f38eb8bb5ddb3814/jackson-databind-2.7.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.4/1e9c6f3659644aeac84872c3b62d8e363bf4c96d/jackson-databind-2.7.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/ad04ede7e2c7f11a140710aec648375122e4e344/jackson-core-2.7.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.4/4ea74f3ff5216967ff4f43e53d2102917aab626d/jackson-annotations-2.7.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.4/84b2f8e53bd8a077d402bc99d9bce816c2b2d0f9/jackson-annotations-2.7.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Administrator/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.aspectj/aspectjweaver/1.8.6/a361b303ca34e33bfdb96cb4e93d516e854366bb/aspectjweaver-1.8.6-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.aspectj/aspectjweaver/1.8.6/7108cf65148f29a55ebf23db2c46224ea9d086dc/aspectjweaver-1.8.6.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Administrator/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/c3p0/c3p0/0.9.1.1/5a069468419fe3910c80d13a8971fd50ff2c77a6/c3p0-0.9.1.1-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/c3p0/c3p0/0.9.1.1/302704f30c6e7abb7a0457f7771739e03c973e80/c3p0-0.9.1.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-pool/commons-pool/1.5.4/3e226507788e09f02eef641e868624fb823af6e6/commons-pool-1.5.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-pool/commons-pool/1.5.4/75b6e20c596ed2945a259cea26d7fadd298398e6/commons-pool-1.5.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-core/1.4.0-RC2/852b09c47fe4b8ad0333292f87413d61d8766398/shiro-core-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-core/1.4.0-RC2/fc06225f589a70ff9c5fca696ae007cee695fd4a/shiro-core-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.4.0-RC2/cbc89041cf636bf0cedd00a97d6644995a378601/shiro-web-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.4.0-RC2/b03f9f13792b47c6241f73d14d052d4e83c8195d/shiro-web-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-cache/1.4.0-RC2/a9a2d8e05c68d68d6a4ba00f7d00bd3aef6f8f64/shiro-cache-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-cache/1.4.0-RC2/fb55ef3a2a89cf032ab10159e3bc40c562a1676a/shiro-cache-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/net.sf.ehcache/ehcache-core/2.6.11/ff19d1cc359b751c727a88545eef88b40f72e5e9/ehcache-core-2.6.11-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/net.sf.ehcache/ehcache-core/2.6.11/fae7f84a5ffabe1b814e40190650c0ad5aeda5b1/ehcache-core-2.6.11.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.4/c5c19e3e6af6b452def290cde12a3ee4c35c893c/httpcore-4.4.4-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.4/b31526a230871fbe285fbcbe2813f9c0839ae9b0/httpcore-4.4.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/3f15fff45d57656685abfee9e8302bf14580044c/commons-codec-1.9-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-lang/1.4.0-RC2/bd5098e5c394690add823c54ea2e3973a7e7576b/shiro-lang-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-lang/1.4.0-RC2/cab9eccfcacc85917626e6934d941a3cf3149f2c/shiro-lang-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-hash/1.4.0-RC2/5367fa78e536a7a52e8c6d8796ca0fe0d740414a/shiro-crypto-hash-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-hash/1.4.0-RC2/8f5066056d1f82b862ec1702f36392a1ce911842/shiro-crypto-hash-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-cipher/1.4.0-RC2/5329596d17a36f976ed1f0fdab2072b86e7fd4fc/shiro-crypto-cipher-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-cipher/1.4.0-RC2/7458e154e57e8fbcbc62dc4377e77450923992/shiro-crypto-cipher-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-config-core/1.4.0-RC2/128a9ed47143e62365b5f411230fc8c080d8c93f/shiro-config-core-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-config-core/1.4.0-RC2/8395f50e54fe168baf3333927c92e111ea3b19c2/shiro-config-core-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-config-ogdl/1.4.0-RC2/1f2a8c9b4e5a6e214faaa34b94c7936e12ea1e95/shiro-config-ogdl-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-config-ogdl/1.4.0-RC2/831e9fb6c2afb9de578079115b037fda8d8b5f36/shiro-config-ogdl-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-event/1.4.0-RC2/e226865748cf45735c63e44424e997d3612a1adf/shiro-event-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-event/1.4.0-RC2/92983d17446823c337be15ad1cd49a27c2e6c364/shiro-event-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-core/1.4.0-RC2/85db162ef0a2cf7a7f53d0be5d085d847a0af19e/shiro-crypto-core-1.4.0-RC2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/org.apache.shiro/shiro-crypto-core/1.4.0-RC2/b2056743b2df41bf0bb37e91a79546c324592b61/shiro-crypto-core-1.4.0-RC2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.3/9d70af7c5982bd09c33efa97ac98cee6363ba0f0/commons-beanutils-1.9.3-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.3/c845703de334ddc6b4b3cd26835458cb1cba1f3d/commons-beanutils-1.9.3.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="E:/Gradle3/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.2/78c50ebda5784937ca1615fc0e1d0cb35857d572/commons-collections-3.2.2-sources.jar" kind="lib" path="E:/Gradle3/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.2/8ad72fe39fa8c91eaaf12aadb21e0c3661fe26d5/commons-collections-3.2.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Administrator/.m2/repository/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+</classpath>

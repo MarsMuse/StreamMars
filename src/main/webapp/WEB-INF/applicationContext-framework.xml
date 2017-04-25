@@ -49,12 +49,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
           <property name="defaultAutoCommit" value="true" />
           <!-- 验证连接有效与否的SQL，不同的数据配置不同 --> 
           <property name="validationQuery" value="select 1 " /> 
-          <property name="filters" value="stat" /> 
-          <property name="proxyFilters"> 
-           <list> 
-            <ref bean="logFilter" /> 
-           </list> 
-          </property> 
+          <property name="filters" value="stat" />
     </bean>
 
     <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
@@ -80,7 +75,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 开启基于注解的事务支持 -->
     <tx:annotation-driven />
 
-    <context:component-scan base-package="com.neusoft.streamone.framework.common.service,com.neusoft.streamone.app" >
+    <context:component-scan base-package="com.beta" >
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
