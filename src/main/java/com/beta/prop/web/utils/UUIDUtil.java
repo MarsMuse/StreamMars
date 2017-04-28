@@ -6,7 +6,7 @@ import java.util.UUID;
  * 
  * @ClassName:  UUIDUtil   
  * @Description:(UUID工具类)   
- * @author: 邹尧
+ * @author: mars
  * @date:   2017年4月28日 上午11:51:50   
  *     
  * @Copyright: 2017 

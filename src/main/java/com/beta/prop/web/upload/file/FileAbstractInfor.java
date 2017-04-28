@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @ClassName:  FileAbstractInfor   
  * @Description:TODO(抽象的文件信息)   
- * @author: 邹尧
+ * @author: mars
  * @date:   2017年4月28日 下午1:25:44   
  *     
  * @Copyright: 2017 

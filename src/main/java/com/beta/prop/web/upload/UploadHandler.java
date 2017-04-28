@@ -11,7 +11,7 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
  * 
  * @ClassName:  UploadHandler   
  * @Description:TODO(文件上传处理器)   
- * @author: 邹尧
+ * @author: mars
  * @date:   2017年4月28日 下午12:09:47   
  *     
  * @Copyright: 2017 

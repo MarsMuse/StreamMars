@@ -21,7 +21,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * 
  * @ClassName:  UploadServlet   
  * @Description:(上传文件的servlet)   
- * @author: 邹尧
+ * @author: mars
  * @date:   2017年4月28日 上午11:57:03   
  *     
  * @Copyright: 2017 
