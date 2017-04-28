@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-可以啊
-</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link  href="css/FireMonkey.css"  type="text/css">
+  </head>
+  <body>
+  
+     <span  class="fm-button fm-button-middle fm-upload-button">
+      浏览
+      <input class="fm-upload-input" type="file"  multiple="multiple">
+    </span>
+      
+    <button  id="testProcess">点击</button>
+    <input  type="file">
+    <button  id="testProcess1">完成</button>
+    </table>
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript">
+      $(function(){
+
+        var instanceId = "252722";
+        var map = {
+          result:'success'
+        };
+          $("#testProcess").click(function(){
+            $.ajax({
+            type: "put",
+            url: "http://192.168.7.249:8080/zhph_loanActivity/process/testSimpleProcess",
+            success: function (info) {
+                console.info(info);
+                instanceId = info.data.processInstanceId;
+                 /*$.ajax({
+                  type: "post",
+                  url: "http://192.168.7.249:8080/zhph_loanActivity/process/task/testSimpleProcess/"+instanceId,
+                  success: function (data) {
+                      console.info(data);
+                  },error:function() {
+                      console.log("error")
+                  }
+                });*/
+            },error:function() {
+                console.log("error")
+            }
+          });
+          });
+          
+
+
+          $("#testProcess1").click(function(){
+              $.ajax({
+            type: "post",
+            url: "http://192.168.7.249:8080/zhph_loanActivity/process/task/testProcessApprovalId/"+instanceId,
+            data:map,
+            dataType:'json',
+            success: function (data) {
+                console.info(data);
+            },error:function() {
+                console.log("error")
+            }
+        });
+          });
+          
+      });
+
+
+    </script>
+  </body>
 </html>
