@@ -1,0 +1,49 @@
+/**
+*created by mars 2017-04-28
+**/
+.fm-upload-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-family: "Microsoft YaHei";
+    padding: 4px 8px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+.fm-button :HOVER{
+    opacity: 0.8;
+}
+.fm-button{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.fm-button-middle{
+    width: 64px;
+    height: 20px;
+
+}
+.fm-upload-input{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px !important;
+    direction: ltr;
+    cursor: pointer;
+}
