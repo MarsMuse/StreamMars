@@ -53,7 +53,7 @@ public class UploadServlet  extends  HttpServlet{
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        //加载请求的文件列表
         uploadHandler.loadRequestFiles(request, response);
     }
 

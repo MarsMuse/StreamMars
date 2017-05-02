@@ -2,28 +2,40 @@ package com.beta.prop.web.upload.file;
 
 /**
  * 
- * @ClassName:  UploadLocalServerFile   
- * @Description:TODO(将文件存储到服务器本地)   
+ * @ClassName:  UploadFileSystem   
+ * @Description:TODO(上传文件至文件服务器)   
  * @author: mars
- * @date:   2017年5月2日 下午5:08:21   
+ * @date:   2017年5月2日 下午5:10:44   
  *     
  * @Copyright: 2017 
  *
  */
-public class UploadLocalServerFile  extends FileAbstractInfor   implements Cloneable{
+public class UploadFileSystem extends FileAbstractInfor {
 
     /**
-     * 
+     * 可序列化
      */
-    private static final long serialVersionUID = 4742516366831741884L;
-    //相对路径
+    private static final long serialVersionUID = -8094539551024192895L;
+    
+    //文件系统访问路径
+    private  String  fileSystemURL;
+    
+    //相对路径（在文件系统的的相对路径）
     private  String  relativePath;
     
     //临时文件名
-    private String storedFileName;
+    private String  storedFileName;
     
     //相对路径文件扩展名
-    private String storedFileExtName;
+    private String  storedFileExtName;
+
+    public String getFileSystemURL() {
+        return fileSystemURL;
+    }
+
+    public void setFileSystemURL(String fileSystemURL) {
+        this.fileSystemURL = fileSystemURL;
+    }
 
     public String getRelativePath() {
         return relativePath;
@@ -53,14 +65,5 @@ public class UploadLocalServerFile  extends FileAbstractInfor   implements Clone
         return serialVersionUID;
     }
     
-    public Object clone() {
-        
-        UploadLocalServerFile localServerFile  =  null;
-        
-        localServerFile = (UploadLocalServerFile) super.clone();
-        return localServerFile;
-    }
     
-    
-
 }

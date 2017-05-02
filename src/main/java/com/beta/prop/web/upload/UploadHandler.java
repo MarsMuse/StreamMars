@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.beta.prop.web.upload.file.FileAbstractInfor;
 
 /**
@@ -18,16 +19,25 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
  *
  */
 public interface UploadHandler {
-
-	/**
-	 * 
-	 * @Title: loadRequestFiles   
-	 * @Description: TODO(加载请求里面的文件)   
-	 * @param: @param request
-	 * @param: @param response      
-	 * @return: void      
-	 * @throws
-	 */
+    //服务器异常
+    static final int HTTP_CODE_SERVER_ERR = 500;
+    //客户端异常
+    static final int HTTP_CODE_CLIENT_ERR = 400;
+    //设置默认的编码集
+    static final String DEFAULT_CHARSET_ENCODING ="UTF-8";
+    //设置响应内容
+    static final String DEFAULT_RESPONSE_CONTENT_TYPE = "application/json";
+    //返回的JSON的数组括号
+    static final String JSON_ARRAY_END = "]";
+    /**
+     * 
+     * @Title: loadRequestFiles   
+     * @Description: TODO(加载请求里面的文件)   
+     * @param: @param request
+     * @param: @param response      
+     * @return: void      
+     * @throws
+     */
     public  void  loadRequestFiles(HttpServletRequest request, HttpServletResponse response);
     
     /**

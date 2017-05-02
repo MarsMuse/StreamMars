@@ -1,58 +1,34 @@
 package com.beta.prop;
 
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import com.beta.prop.web.upload.file.Animal;
-import com.beta.prop.web.upload.file.Person;
-import com.beta.prop.web.upload.file.TestSer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Demo {
     
     public static void main(String[] args) {
-        Animal a = new Animal();
-        a.setGender("222");
-        Person p  = new Person();
-        p.setAge("25");
-        TestSer ta = new TestSer();
-        ta.setName("mars");
-        p.setTestSer(ta);
-        p.setTestSer(ta);
-        a.setPerson(p );
-        TestSer t2 = new TestSer();
-        t2.setName("muse");
-        a.setTestSer(t2);
-        
-        Animal an =  a.myClone();
-        
-        an.setGender("555");
-        
-        System.out.println(a.getGender());
-        System.out.println(an.getGender());
-        System.out.println(an);
-        System.out.println(a);
-        
-        try {
-            FileOutputStream  fos  =  new FileOutputStream(new File("d:/fire.txt"));
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(a);
-            FileInputStream fis = new FileInputStream(new File("d:/fire.txt"));
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Animal anm = (Animal) ois.readObject();
-            System.out.println(anm);
-            System.out.println(a == anm);
-            System.out.println(anm.getTestSer().getName());
-        } catch ( IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        
-        
+    	System.out.println(Thread.currentThread());
+        ExecutorService singleThreadExecutor = Executors.newCachedThreadPool();  
+          for (int i = 0; i < 100; i++) {  
+        	  for(int j = 0 ;j <200;j++){
+           final int index = j;  
+           singleThreadExecutor.execute(new Runnable() {  
+            public void run() {  
+              System.out.println(index);
+              System.out.println(Thread.currentThread());
+              try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            }
+            });
+           
+          }
+           try {
+               Thread.sleep(5000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+          }
     }
 }
