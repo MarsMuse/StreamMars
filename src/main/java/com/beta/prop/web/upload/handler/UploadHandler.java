@@ -1,4 +1,4 @@
-package com.beta.prop.web.upload;
+package com.beta.prop.web.upload.handler;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
  * @Copyright: 2017 
  *
  */
-public interface UploadHandler {
+public abstract class UploadHandler {
     //服务器异常
     static final int HTTP_CODE_SERVER_ERR = 500;
     //客户端异常
@@ -27,8 +27,23 @@ public interface UploadHandler {
     static final String DEFAULT_CHARSET_ENCODING ="UTF-8";
     //设置响应内容
     static final String DEFAULT_RESPONSE_CONTENT_TYPE = "application/json";
-    //返回的JSON的数组括号
+    //返回的JSON数组开始括号
+    static final String JSON_ARRAY_START = "[";
+    //返回的JSON数组结束括号
     static final String JSON_ARRAY_END = "]";
+    
+    /**
+     * 
+     * @Title: hanler   
+     * @Description: TODO(处理上传文件)   
+     * @param: @param request
+     * @param: @param response      
+     * @return: void      
+     * @throws
+     */
+    public   void   handler(HttpServletRequest request, HttpServletResponse response){
+    	
+    }
     /**
      * 
      * @Title: loadRequestFiles   
@@ -38,7 +53,7 @@ public interface UploadHandler {
      * @return: void      
      * @throws
      */
-    public  void  loadRequestFiles(HttpServletRequest request, HttpServletResponse response);
+    public abstract  void  loadRequestFiles(HttpServletRequest request, HttpServletResponse response);
     
     /**
      * 
@@ -50,5 +65,5 @@ public interface UploadHandler {
      * @return: List<FilePath>      
      * @throws
      */
-    public List<FileAbstractInfor>  saveFileToServer(HttpServletRequest request, HttpServletResponse response);
+    public abstract List<FileAbstractInfor>  saveFileToServer(HttpServletRequest request, HttpServletResponse response);
 }

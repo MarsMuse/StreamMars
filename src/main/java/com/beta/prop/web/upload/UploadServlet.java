@@ -17,6 +17,9 @@ import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.beta.prop.web.upload.handler.UploadHandler;
+import com.beta.prop.web.upload.observer.UploadObserver;
+
 /**
  * 
  * @ClassName:  UploadServlet   
@@ -42,6 +45,11 @@ public class UploadServlet  extends  HttpServlet{
      * 上传文件处理器
      */
     private UploadHandler uploadHandler;
+    
+    /**
+     * 文件处理器观察者
+     */
+    private UploadObserver uploadObserver;
     /**
      * 
      * <p>Title: doPost</p>   
@@ -53,8 +61,11 @@ public class UploadServlet  extends  HttpServlet{
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //加载请求的文件列表
-        uploadHandler.loadRequestFiles(request, response);
+        //获取到文件上传处理器
+        uploadHandler  =  uploadObserver.getInstance(request);
+        
+        //处理上传文件
+        uploadHandler.handler(request, response);
     }
 
 
@@ -74,9 +85,9 @@ public class UploadServlet  extends  HttpServlet{
         //获取到Spring容器上下文
         WebApplicationContext  appContext   = WebApplicationContextUtils.getWebApplicationContext(context);
         
-        //获取到spring容器中的文件处理器
+        //获取到spring容器中的上传观察者
         try {
-            this.uploadHandler  =  appContext.getBean(UploadHandler.class);
+            this.uploadObserver  =  appContext.getBean(UploadObserver.class);
         }catch (NoUniqueBeanDefinitionException e){
             log.error("应用上下文环境中的上传处理bean不唯一，上传组件初始化失败！", e);
         }catch (NoSuchBeanDefinitionException e){

@@ -1,4 +1,4 @@
-package com.beta.prop.web.upload;
+package com.beta.prop.web.upload.handler;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
  * @Copyright: 2017 
  *
  */
-public class SynUploadHandler implements UploadHandler {
+public class UploadFileSystemHandler extends UploadHandler {
     //日志打印
-    private  static  final  Logger  log  =  LoggerFactory.getLogger(SynUploadHandler.class);
+    private  static  final  Logger  log  =  LoggerFactory.getLogger(UploadFileSystemHandler.class);
     @Override
     public void loadRequestFiles(HttpServletRequest request, HttpServletResponse response) {
         log.debug("异步上传-->开始加载上传文件");
