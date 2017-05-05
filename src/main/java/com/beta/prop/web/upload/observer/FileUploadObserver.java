@@ -10,7 +10,7 @@ import com.beta.prop.web.upload.handler.UploadLocalHandler;
 /**
  * 
  * @ClassName:  FileUploadObserver   
- * @Description:TODO(文件上传观察者)   
+ * @Description:TODO(文件上传处理器观察者 ， 根据请求标志位的不同  使用不同的文件处理对象 ，实现 文件上传的解耦合 单一职责)   
  * @author: mars<FireMonkeyFrame@163.com>
  * @date:   2017年5月3日 下午5:53:17   
  *     
@@ -19,8 +19,10 @@ import com.beta.prop.web.upload.handler.UploadLocalHandler;
  */
 public class FileUploadObserver implements UploadObserver {
     
+    //上传到文件服务器的处理器
     private  UploadFileSystemHandler    ufsHandler;
     
+    //上传到本地服务器的处理器
     private  UploadLocalHandler  ulHandler;
     
     @Override

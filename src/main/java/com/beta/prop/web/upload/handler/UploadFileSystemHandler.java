@@ -23,12 +23,7 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
 public class UploadFileSystemHandler extends UploadHandler {
     //日志打印
     private  static  final  Logger  log  =  LoggerFactory.getLogger(UploadFileSystemHandler.class);
-    @Override
-    public void loadRequestFiles(HttpServletRequest request, HttpServletResponse response) {
-        log.debug("异步上传-->开始加载上传文件");
-        
-        
-    }
+
 
     @Override
     public List<FileAbstractInfor> saveFileToServer(HttpServletRequest request, HttpServletResponse response) {
