@@ -90,7 +90,7 @@ public abstract class UploadHandler {
         upload.setFileSizeMax(uploadStrategy.getFileMaxSize());
         //限制上传总大小
         upload.setSizeMax(uploadStrategy.getAllMaxSize());
-        //上传响应数据 转换为JSON(线程安全)
+        //上传响应数据 拼接成为为JSON字符串用于返回到前台(线程安全)
         StringBuilder  requestData = new StringBuilder(JSON_ARRAY_START);
         //上传文件迭代器
         FileItemIterator  uploadFileIterator  =  null;

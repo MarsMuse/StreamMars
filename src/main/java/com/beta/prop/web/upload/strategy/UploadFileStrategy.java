@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 
  * @ClassName:  UploadFileStrategy   
- * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @Description:TODO(文件上传策略)   
  * @author:  mars<FireMonkeyFrame@163.com>
  * @date:   2017年5月4日 下午1:49:42   
  *     

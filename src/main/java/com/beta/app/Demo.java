@@ -1,5 +1,16 @@
 package com.beta.app;
 
-public class Demo {
+import com.beta.prop.proxy.ProxyDemo;
 
+public class Demo  extends ProxyDemo{
+    Demo() {
+		super();
+	}
+
+    public void test(){
+    	
+    }
+	public static void main(String[] args) {
+    	
+	}
 }

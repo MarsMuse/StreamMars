@@ -13,7 +13,7 @@ import com.beta.prop.web.upload.file.FileAbstractInfor;
 /**
  * 
  * @ClassName:  AsyUploadHandler   
- * @Description:(异步文件上传处理器)   
+ * @Description:(文件到本地上传处理器)   
  * @author: mars<FireMonkeyFrame@163.com>
  * @date:   2017年5月2日 下午2:25:34   
  *     
@@ -28,7 +28,7 @@ public class UploadLocalHandler  extends UploadHandler {
 
     @Override
     public List<FileAbstractInfor> saveFileToServer(HttpServletRequest request, HttpServletResponse response) {
-        
+        log.debug("存储文件到应用服务器");
         return null;
     }
 
