@@ -26,4 +26,6 @@ public class UUIDUtil {
         String  uuid  =  UUID.randomUUID().toString().replaceAll("-", "");
         return uuid;
     }
+    
+    private  UUIDUtil(){}
 }

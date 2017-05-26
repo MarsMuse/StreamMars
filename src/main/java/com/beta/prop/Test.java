@@ -1,25 +1,32 @@
 package com.beta.prop;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Test  {
     public static CopyOnWriteArrayList<String>  cowl =  new CopyOnWriteArrayList<>();
     private List<Integer>  dataList = new ArrayList<Integer>();
     public static   Integer  m = new Integer(0)  ;
     public static volatile long te = 0L;
+    private int n = 0;
     public static AtomicInteger ai = new AtomicInteger(0);
-    
-
+    public static Lock  lock = new ReentrantLock();
+    public  static void testLock(long a){
+        lock.lock();
+        System.out.println("时间："+System.currentTimeMillis()+"数字："+a);
+        lock.unlock();
+    }
     
     public   int add(){
-        synchronized(Test.m){
+        synchronized(this){
          
-            return ++m;
+            return ++n;
         }
         
     }
@@ -47,20 +54,16 @@ public class Test  {
     
     public static void main(String[] args) {
         
-        System.out.println(Integer.MAX_VALUE);
-        Executor  exe =  Executors.newCachedThreadPool();
-        for(int i = 0 ; i < 10001 ; i++){
+        /*System.out.println(Integer.MAX_VALUE);
+        Executor  exe =  Executors.newFixedThreadPool(1000);
+        for(int i = 0 ; i < 1000000 ; i++){
             
             final int se = i;
             exe.execute(new Runnable() {
                 
                 @Override
                 public void run() {
-                	Test t = new Test();
-                    int a = t.add();
-                    Test.cowl.addIfAbsent(a+"");
-                    // System.out.println("数据："+a);
-                    System.out.println("Count:"+Test.cowl.size());
+                    Test.testLock(Thread.currentThread().getId());
                 }
             });
         }
@@ -71,7 +74,41 @@ public class Test  {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println(Test.cowl.size());
+        System.out.println(Test.cowl.size());*/
         
+        /*SingleEnum a = SingleEnum.Instance;
+        a.sys();
+        
+        System.out.println(a  instanceof  Object);
+        
+        
+        Demo dn3 = new Dn3();
+        
+        Dn1 dn1 = new Dn1();
+        
+        System.out.println(dn3 instanceof Demo);
+        System.out.println(dn3.getClass()  ==   Dn1.class);
+        
+       Objects.equals("", "");*/
+
+        /*String[] a ={"aaa" ,"aaa" ,"aaa" ,"aaa" ,"aaa" ,"aaa" ,"aaa" ,"aaa" ,"aaa" };
+        String[] b ={"b" ,"b" ,"b"};
+        System.arraycopy(b, 0, a, 0, b.length);
+        a[b.length] = null;
+        for(String mm : a){
+        	System.out.println(mm);
+        }*/
+    	
+    	System.out.println((1<<20)/1024);
     }
+    
+    
+    static class Demo{}
+    
+     static class Dn1 extends Demo{}
+    
+    
+     static class Dn2 extends Demo{}
+    
+   static class Dn3 extends Dn2{}
 }
