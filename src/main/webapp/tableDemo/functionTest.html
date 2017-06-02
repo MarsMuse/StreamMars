@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>function</title>
+
+    <link href="js/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main-monkey.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+  <button  class="btn btn-info"  onclick="test()">点击测试</button>
+
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-table/1.11.1/dist/bootstrap-table.min.js"></script>
+    <script src="js/main-monkey.js"></script>
+
+
+    <script>
+      var instance = new TableInstance();
+      var infor = {
+
+        in:'111',
+        out:'22'
+      };
+      instance.grid(infor);
+      var mm = "#dddd*dd#ddd#";
+      
+      while(mm.search("#") != -1){
+        mm = mm.replace("#","");
+        console.info(mm);
+      }
+
+      var nn = [{a:'1'},{a:'2'},{a:'3'}];
+
+      console.log(nn);
+      console.log(!(nn instanceof Array) );
+
+      var obj1 = {
+
+        a:'1111',
+        b:'2222',
+        c:'3333',
+        d:4,
+        e:'e'
+
+      };
+      var obj2 ={
+        a:'6666',
+        e:'8888',
+        g:'5555',
+        h:2
+      };
+      console.log(obj1);
+
+      $.extend(obj1,obj2);
+      console.log(obj1);
+      console.log(obj2);
+
+    </script>
+  </body>
+</html>
