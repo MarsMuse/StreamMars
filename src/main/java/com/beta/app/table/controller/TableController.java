@@ -16,11 +16,10 @@ import com.beta.app.table.service.TableService;
 /**
  * 
  * <p>application name:{应用名称}</p>
- * <p>application describing:{功能描述}</p>
- * <p>Copyright：Copyright 2017 东软 政府第五事业部版权所有。</p>
+ * <p>application describing:{功能描述}</p
  * <p>company:neusoft</p>
  * <p>time:2017年6月4日</p>
- * @author {邹尧}
+ * @author {FireMonkey}
  * @version {1.0}
  */
 
