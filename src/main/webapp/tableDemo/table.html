@@ -9,6 +9,7 @@
     <title>table</title>
 
     <link href="js/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="js/bootstrap-table/1.11.1/dist/bootstrap-table.min.css" rel="stylesheet">
     <link href="css/main-monkey.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -66,7 +67,9 @@
                 </form>
               </div>
             </div>
-
+            <div id="toolbar1">
+                <button type="button" class="btn btn-primary" onclick="queryDataByButton()">查询</button>
+            </div>
             <!-- 表格内容-->
             <table  id="dataInforTable"></table>
           </div>
@@ -76,6 +79,83 @@
     <script src="js/jquery/jquery.js"></script>
     <script src="js/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/bootstrap-table/1.11.1/dist/bootstrap-table.min.js"></script>
+    <script src="js/bootstrap-table/1.11.1/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script src="js/main-monkey.js"></script>
+    <script >       
+        $(function(){
+            /* var instance = new TableInstance();
+            var infor = {
+                url:"http://127.0.0.1:8080/StreamMars/action/tablecontroller/areainfor",
+                uniqueId:'areaCode',
+                method:'post'
+            };
+            
+            infor.columns=[
+                           {
+                               field: 'areaCode',
+                               title: '区域编码'
+                           },
+                           {
+                               field: 'areaName',
+                               title: '区域名称'
+                           },
+                           {
+                               field: 'areaPath',
+                               title: '区域路径'
+                           }
+                           ];
+           instance.grid("dataInforTable" , infor); */
+           
+           getAreaData  =  function(gridHandler , page){
+               
+               $.ajax({
+                   url:"http://127.0.0.1:8080/StreamMars/action/tablecontroller/areainfor",
+                   method:"post",
+                   data:"page",
+                   dataType:"json"
+               }).success(gridHandler).error(function(){
+                   console.log("获取数据异常")
+               }); 
+           };
+          
+           
+             var tba = new TableByAjax();
+             
+           
+             var infor = {
+                 uniqueId:'areaCode',
+                 method:'post',
+                 toolbar:'#toolbar1'
+             };
+             
+             infor.columns=[
+                            {
+                                field: 'areaCode',
+                                title: '区域编码'
+                            },
+                            {
+                                field: 'areaName',
+                                title: '区域名称'
+                            },
+                            {
+                                field: 'areaPath',
+                                title: '区域路径'
+                            }
+                            ];
+             
+             var tbControl = {
+                     dataHandler :getAreaData,
+                     options:infor,
+             }
+            var gridController = tba.grid("dataInforTable" , tbControl);
+             
+             console.log(gridController);
+            
+            
+             queryDataByButton = function(){
+            	 gridController.query();
+             }
+        });
+    </script>
   </body>
 </html>
