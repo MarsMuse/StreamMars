@@ -1,9 +1,7 @@
 package com.beta.prop;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
@@ -96,10 +94,17 @@ public class Test  {
         System.arraycopy(b, 0, a, 0, b.length);
         a[b.length] = null;
         for(String mm : a){
-        	System.out.println(mm);
+            System.out.println(mm);
         }*/
-    	
-    	System.out.println((1<<20)/1024);
+        /*char ch = 'a';
+        int ma = Integer.MAX_VALUE +33333;
+        System.out.println(ma);
+        */
+        
+        String a = new String("asdo");
+        String b = new String();
+        
+        System.out.println(Long.valueOf("mmm"));
     }
     
     

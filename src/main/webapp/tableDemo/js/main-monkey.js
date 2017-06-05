@@ -52,6 +52,14 @@ var  dealColumnsAndUniqueId  =  function(uniqueId , columnList){
         //将第一列设置为唯一主键
         uniqueId = info.field;
     }
+    
+    for(var i = 0 ; i<columnList.length ; i++){
+        var temp = columnList[i];
+        //如果不存在配置垂直位置
+        if(!temp.hasOwnProperty("valign")){
+            temp.valign = "middle"
+        }
+    }
 };
 
 //配置请求参数
@@ -78,9 +86,6 @@ var dataHandler = function(data){
         };
     }
 };
-
-
-
 //列表渲染对象
 var TableInstance  =  function(){
     //配置默认的表格加载参数
@@ -160,7 +165,7 @@ var  TableByAjax    =   function(){
         pageSize: 10,                       //默认每页的记录行数
         pageList: [10, 15, 30, 50],         //可供选择的每页的行数
         search: false,                       //是否显示表格搜索，此搜索是只是在客户端进行搜索，不会请求服务端
-        strictSearch: true,
+        strictSearch: false,
         showColumns: true,                  //是否显示所有的列
         showRefresh: true,                  //是否显示刷新按钮
         minimumCountColumns: 1,             //最少允许的列数
@@ -168,7 +173,10 @@ var  TableByAjax    =   function(){
         showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
         cardView: false,                    //是否显示详细视图
         detailView: false,                  //是否显示父子表
+        resizable: false,                        //是否可以拉动每一列
+        paginationVAlign:"bottom",    //由于resize与分页栏在chrome中会有冲突，会出现table的水平滚动轴与分页栏后重合的情况，所以，当业务需求必须resize时，将分页栏调至上部，这个问题得到解决
         undefinedText:""                   //为空值时显示字符串
+        
     };
     
     //新建一个表格初始化对象
@@ -176,11 +184,17 @@ var  TableByAjax    =   function(){
 
     //对表格进行初始化
     tableInit.grid = function(id , tbControl){
-    	var tableId = id;
+        var tableId = id;
         //判断表格是否存在
         if(!tableId) {
             //当表格ID不存在是无法初始化表格
-            console.error("表格ID不存在");
+            console.error("调用此服务必须提供表格ID");
+            return;
+        }
+        
+        if(!tbControl.dataHandler) {
+            //当表格ID不存在是无法初始化表格
+            console.error("调用此服务必须提供数据处理器接口");
             return;
         }
 
@@ -200,7 +214,7 @@ var  TableByAjax    =   function(){
         //自定义bootstrap ajax
         defControl.ajax = function(params){
             
-        	//创建一个表格处理器
+            //创建一个表格处理器
             var  gridHandler  =  function(data){
                 //创建一个bootstrap需要的数据模型
                 var result = {};
@@ -215,14 +229,11 @@ var  TableByAjax    =   function(){
                 params.success(result);
                 
             };
-            console.log(dataHandler);
             //调用传入的数据处理器通过配置的分页端
             if(defControl.sidePagination === 'server'){
-                var pageNumber = params.data.offset / params.data.limit + 1;
-                var page = new FmPage(pageNumber, params.data.limit);
-                
-                console.log(dataHandler);
-                console.log(page)
+                var paramData = JSON.parse(params.data);
+                var currentPage = paramData.offset / paramData.limit + 1;
+                var page = new FmPage(currentPage, paramData.limit);
                 dataHandler(gridHandler , page);
             }else{
                 dataHandler(gridHandler);
@@ -235,8 +246,12 @@ var  TableByAjax    =   function(){
         
         //向外界提供查询按钮函数
         gridController.query = function(){
-        	
-        	$("#"+tableId).bootstrapTable("refresh");
+            
+            $("#"+tableId).bootstrapTable("refresh");
+        };
+        
+        gridController.getSelections = function(){
+            return $("#"+tableId).bootstrapTable('getSelections');
         };
         //渲染列表
         $("#"+tableId).bootstrapTable(defControl);

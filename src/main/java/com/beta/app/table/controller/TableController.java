@@ -34,7 +34,7 @@ public class TableController {
     @RequestMapping(value="/areainfor")
     @ResponseBody
     public Map<String , Object>  getListForAreaInfor(HttpServletRequest request  , HttpServletResponse response  ,Map<String , String> parameter){
-        
+
         Map<String , Object> map = new HashMap<String , Object>();
         
         map.put("result", tableService.getListForAreaInfor(parameter));

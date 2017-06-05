@@ -40,7 +40,7 @@
           <div class="row">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">查询</h3>
+                <h3 class="panel-title">查询条件</h3>
               </div>
               <div class="panel-body">
                 <form class="form-inline">
@@ -68,7 +68,9 @@
               </div>
             </div>
             <div id="toolbar1">
-                <button type="button" class="btn btn-primary" onclick="queryDataByButton()">查询</button>
+                <button type="button" class="btn btn-primary" onclick="queryDataByButton()"><span  class="glyphicon glyphicon-search  table-span-icon"></span>查询</button>
+                <button type="button" class="btn btn-success" onclick="addDataByButton()"><span  class="glyphicon glyphicon-plus  table-span-icon"></span>新增</button>
+                <button type="button" class="btn btn-info" onclick="exportDataByButton()"><span  class="glyphicon glyphicon-download-alt  table-span-icon"></span>导出</button>
             </div>
             <!-- 表格内容-->
             <table  id="dataInforTable"></table>
@@ -77,83 +79,103 @@
       </div>
     </div>
     <script src="js/jquery/jquery.js"></script>
+    <script src="js/colResizable/1.6/colResizable-1.6.min.js"></script>
     <script src="js/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-table/1.11.1/dist/bootstrap-table.min.js"></script>
+    <script src="js/bootstrap-table/1.11.1/dist/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table/1.11.1/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
     <script src="js/bootstrap-table/1.11.1/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script src="js/main-monkey.js"></script>
     <script >       
         $(function(){
-            /* var instance = new TableInstance();
-            var infor = {
-                url:"http://127.0.0.1:8080/StreamMars/action/tablecontroller/areainfor",
-                uniqueId:'areaCode',
-                method:'post'
-            };
-            
-            infor.columns=[
-                           {
-                               field: 'areaCode',
-                               title: '区域编码'
-                           },
-                           {
-                               field: 'areaName',
-                               title: '区域名称'
-                           },
-                           {
-                               field: 'areaPath',
-                               title: '区域路径'
-                           }
-                           ];
-           instance.grid("dataInforTable" , infor); */
-           
+           //查询列表数据的函数 
            getAreaData  =  function(gridHandler , page){
                
                $.ajax({
                    url:"http://127.0.0.1:8080/StreamMars/action/tablecontroller/areainfor",
                    method:"post",
-                   data:"page",
+                   data:page,
                    dataType:"json"
                }).success(gridHandler).error(function(){
                    console.log("获取数据异常")
                }); 
            };
           
-           
+           //表格渲染对象
              var tba = new TableByAjax();
-             
-           
-             var infor = {
-                 uniqueId:'areaCode',
-                 method:'post',
-                 toolbar:'#toolbar1'
+             //渲染参数
+             var tbOptions = {
+                 uniqueId : 'areaCode',
+                 method : 'post',
+                 toolbar : '#toolbar1',
+                 //resizable:true, //注：如果要求启用resizable 一定要将paginationVAlign设置为top，否则在部分版本的chrome中出现table水平滚动轴与分页栏部分重合的情况
+                 columns : [
+                           {
+                               field: 'checked',
+                               checkbox: true ,//注 ： 若是单选则为radio:true，并且将tbOptions.clickToSelect :true
+                               class:"check-middle-td" // 注：由于td内部子元素的影响 valign:'middle'这种居中方式无效 需要自己写一个class 在此引入，即可规避该 td的纵向居中问题
+                           },
+                          {
+                              field: 'areaCode',
+                              title: '区域编码'
+                          },
+                          {
+                              field: 'areaName',
+                              title: '区域名称'
+                          },
+                          {
+                              field: 'areaPath',
+                              title: '区域路径'
+                          },
+                          {
+                              field: 'areaCode',
+                              title: '操作',
+                              width:"16%",
+                              formatter:function(value , rowEntity , index){
+                                  
+                                  return'<button type="button" class="btn btn-success  btn-sm  "  onclick="editData(\''+value+'\')"   style="margin-right:12px;"><span  class="glyphicon glyphicon-edit  table-span-icon"></span>修改</button>'
+                                              +'<button type="button" class="btn btn-info  btn-sm"  onclick="showDetailInfor(\''+value+'\')"><span  class="glyphicon glyphicon-th  table-span-icon"></span>详情</button>';
+                              }
+                          },
+                          ],
+                 rowStyle:function(rowEntity , index){
+                     if(rowEntity.areaCode == "110000"){
+                         return {classes:'danger'};
+                     }
+                     else{
+                         return {};
+                     }
+                 }
              };
              
-             infor.columns=[
-                            {
-                                field: 'areaCode',
-                                title: '区域编码'
-                            },
-                            {
-                                field: 'areaName',
-                                title: '区域名称'
-                            },
-                            {
-                                field: 'areaPath',
-                                title: '区域路径'
-                            }
-                            ];
-             
+             //表格初始化配置
              var tbControl = {
                      dataHandler :getAreaData,
-                     options:infor,
-             }
+                     options:tbOptions
+             };
+             //获取到表格控制器
             var gridController = tba.grid("dataInforTable" , tbControl);
              
-             console.log(gridController);
             
-            
+            //查询按钮点击事件触发函数
              queryDataByButton = function(){
-            	 gridController.query();
+                 gridController.query();
+             }
+             
+            //编辑数据按钮点击事件触发函数
+             editData = function(code){
+                 console.log("当前Code:"+code);
+             };
+             //查看详情触发函数
+             showDetailInfor= function(code){
+                 console.log("当前Code:"+code);
+             };
+             //新增数据
+             addDataByButton  =  function(){
+                 console.log("新增数据");
+             }
+             //导出数据
+             exportDataByButton  =  function(){
+                 console.log(gridController.getSelections());
              }
         });
     </script>
