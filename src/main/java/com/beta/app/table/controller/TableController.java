@@ -1,6 +1,5 @@
 package com.beta.app.table.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.beta.app.table.service.TableService;
+import com.beta.prop.pagination.Page;
 
 /**
  * 
@@ -35,11 +35,9 @@ public class TableController {
     @ResponseBody
     public Map<String , Object>  getListForAreaInfor(HttpServletRequest request  , HttpServletResponse response  ,Map<String , String> parameter){
 
-        Map<String , Object> map = new HashMap<String , Object>();
-        
-        map.put("result", tableService.getListForAreaInfor(parameter));
-        map.put("totalCount",500);
-        
-        return map;
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        int limit = Integer.parseInt(request.getParameter("limit"));
+        Page page = new Page(currentPage, limit);
+        return tableService.getListForAreaInfor(parameter , page);
     }
 }

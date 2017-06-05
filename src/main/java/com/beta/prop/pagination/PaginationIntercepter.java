@@ -1,6 +1,7 @@
 package com.beta.prop.pagination;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +32,6 @@ import org.slf4j.LoggerFactory;
 import com.beta.prop.pagination.dialect.Dialect;
 import com.beta.prop.pagination.dialect.OracleDialect;
 import com.beta.prop.util.ReflectHandler;
-import com.mysql.jdbc.PreparedStatement;
 
 /**
  * 
@@ -44,7 +44,7 @@ import com.mysql.jdbc.PreparedStatement;
  *
  */
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare",
-args = {Connection.class})})
+args = {Connection.class,Integer.class})})
 public class PaginationIntercepter implements Interceptor {
 
     private   Logger log  =  LoggerFactory.getLogger(PaginationIntercepter.class);
@@ -64,9 +64,9 @@ public class PaginationIntercepter implements Interceptor {
      * @see org.apache.ibatis.plugin.Interceptor#intercept(org.apache.ibatis.plugin.Invocation)
      */
     
- 
+ @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        log.debug("拦截到需要分页的Sql");
+        
         //获取到mybatis的语句处理器
         StatementHandler  statementHandler = (StatementHandler) invocation.getTarget();
         //获取到基本的语句处理器
@@ -76,9 +76,10 @@ public class PaginationIntercepter implements Interceptor {
         //获取到映射的statement
         MappedStatement  mappedStatement = (MappedStatement) ReflectHandler.getValueByFieldName(delegate, "mappedStatement");
         //如果sql方法不匹配 则不过滤
-        if(mappedStatement.getId().matches(this.pageSqlId)){
+        if(!mappedStatement.getId().matches(this.pageSqlId)){
             invocation.proceed();
         }
+        log.debug("拦截到需要分页的Sql,ID为：{}" , mappedStatement.getId());
         //如果未传入分页对象不过滤
         if(rowBounds == null || rowBounds  == RowBounds.DEFAULT){
             invocation.proceed();
@@ -160,6 +161,16 @@ public class PaginationIntercepter implements Interceptor {
                 RowBounds.NO_ROW_LIMIT);
         return invocation.proceed();
     }
+ /**
+  * 
+  * {参考DefaultParameterHandler的方法}
+  * 
+  * @param ps预编译的SQL
+  * @param mappedStatement映射的SQL
+  * @param boundSql绑定的SQL
+  * @throws SQLExceptionSQL语句异常
+  * @author:{FireMonkey}
+  */
     @SuppressWarnings("unchecked")
     private void setParameters(PreparedStatement ps, MappedStatement mappedStatement,
             BoundSql boundSql) throws SQLException
@@ -198,14 +209,24 @@ public class PaginationIntercepter implements Interceptor {
     }
     @Override
     public Object plugin(Object target) {
-        
         return Plugin.wrap(target, this);
     }
 
     @Override
-    public void setProperties(Properties arg0) {
-        
-
+    public void setProperties(Properties arg0) {}
+    public Dialect getDialect() {
+        return dialect;
     }
+    public void setDialect(Dialect dialect) {
+        this.dialect = dialect;
+    }
+    public String getPageSqlId() {
+        return pageSqlId;
+    }
+    public void setPageSqlId(String pageSqlId) {
+        this.pageSqlId = pageSqlId;
+    }
+    
+    
 
 }

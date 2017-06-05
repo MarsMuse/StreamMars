@@ -31,8 +31,8 @@ public class Page {
      * @param:  @param limit  
      * @throws
      */
-    public Page(int cuurentPage  ,  int limit){
-        this.currentPage = cuurentPage;
+    public Page(int currentPage  ,  int limit){
+        this.currentPage = currentPage;
         this.limit = limit;
     }
     

@@ -63,14 +63,28 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         </property>
     </bean>
 
+    <bean id="paginationIntercepter" class="com.beta.prop.pagination.PaginationIntercepter">
+        <property name="dialect">
+            <bean class="com.beta.prop.pagination.dialect.MySqlDialect"></bean>
+        </property>
+        <property name="pageSqlId" value=".*getListFor.*" />
+    </bean>
+    
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="databaseIdProvider" ref="databaseIdProvider" />
         <property name="dataSource" ref="frameworkDataSource" />
+        <property name="plugins">
+            <array>
+                <ref bean="paginationIntercepter"/>
+            </array>
+        </property>
     </bean>
     
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="frameworkDataSource" />
     </bean>
+    
+
     
     <!-- 开启基于注解的事务支持 -->
     <tx:annotation-driven />

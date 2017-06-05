@@ -7,6 +7,5 @@
             AREA_LEVEL AS areaLevel, AREA_PARENT AS areaParent,
             AREA_PATH AS areaPath
         FROM area_infor
-        LIMIT 0 ,10
     </select>
 </mapper>
