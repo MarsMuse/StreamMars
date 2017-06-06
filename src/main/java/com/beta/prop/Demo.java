@@ -37,10 +37,10 @@ public class Demo {
         
         System.out.println(te.length);*/
         
-        List<String>  arrayData  =   new ArrayList<String>();
+       /* List<String>  arrayData  =   new ArrayList<String>();
         List<String>  linkData = new LinkedList<String>();
         Demo.initList(arrayData, 50000);
-        Demo.initList(linkData, 50000);
+        Demo.initList(linkData, 50000);*/
         
         /*Demo.judge(arrayData);
         Demo.judge(linkData);
@@ -51,7 +51,16 @@ public class Demo {
         Demo.itera(arrayData);
         Demo.itera(linkData);*/
         
-        
+        String sql = "   maaaaaaaaaaf;   ";
+        System.out.println(sql.length());
+        sql = sql.trim();
+        System.out.println(sql.length());
+        int delIndex = sql.lastIndexOf(";");
+        if(delIndex == (sql.length()-1)){
+        	sql = sql.substring(0, sql.length()-1);
+        }
+        System.out.println(sql);
+        System.out.println(sql.length());
     }
     
     static class  HashProbobility{
