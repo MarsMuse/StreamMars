@@ -6,6 +6,6 @@
         SELECT AREA_CODE AS areaCode , AREA_NAME AS areaName ,
             AREA_LEVEL AS areaLevel, AREA_PARENT AS areaParent,
             AREA_PATH AS areaPath
-        FROM area_infor;
+        FROM area_infor
     </select>
 </mapper>
