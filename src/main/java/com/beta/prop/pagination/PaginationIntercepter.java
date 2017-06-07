@@ -97,6 +97,9 @@ public class PaginationIntercepter implements Interceptor {
         //获取到Sql
         BoundSql  boundSql  =  statementHandler.getBoundSql();
         String  originalSql  = boundSql.getSql();
+        //sql预处理 去除两端空格
+        PaginationIntercepter.dealSQL(originalSql);
+        
         log.debug("分页Sql的原Sql为：{}", originalSql);
         //获取到当前Session的连接
         Connection connection  =   (Connection) invocation.getArgs()[0];
@@ -207,6 +210,23 @@ public class PaginationIntercepter implements Interceptor {
             }
         }
     }
+    /**
+     * 
+     * @Title: dealSQL   
+     * @Description: TODO(对传入的Sql进行预处理)   
+     * @param: @param originalSql      
+     * @return: void      
+     * @throws
+     */
+    public static final void dealSQL(String originalSql){
+        //去除空格
+        originalSql = originalSql.trim();
+        //查看分号位置
+        int  index  =  originalSql.lastIndexOf(";");
+        if(index == (originalSql.length()-1)){
+           originalSql = originalSql.substring(0 , originalSql.length()-1);
+        }
+    }
     @Override
     public Object plugin(Object target) {
         return Plugin.wrap(target, this);
@@ -226,7 +246,4 @@ public class PaginationIntercepter implements Interceptor {
     public void setPageSqlId(String pageSqlId) {
         this.pageSqlId = pageSqlId;
     }
-    
-    
-
 }
