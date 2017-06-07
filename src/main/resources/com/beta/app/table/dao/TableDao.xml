@@ -8,4 +8,13 @@
             AREA_PATH AS areaPath
         FROM area_infor
     </select>
+    
+    
+    <select  id="getMenuInfor"   parameterType="java.util.Map"  resultType="com.beta.app.table.entity.MenuInfor">
+        SELECT id , PARENT_ID AS parentId ,NAME AS NAME ,
+            URL AS url , ICON AS icon , DISPLAY_ORDER AS displayOrder ,
+            PATH AS path , NOTE AS note , LOCKED AS locked 
+        
+         FROM stf_res_menu
+    </select>
 </mapper>

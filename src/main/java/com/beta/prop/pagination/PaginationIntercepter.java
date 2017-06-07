@@ -77,16 +77,16 @@ public class PaginationIntercepter implements Interceptor {
         MappedStatement  mappedStatement = (MappedStatement) ReflectHandler.getValueByFieldName(delegate, "mappedStatement");
         //如果sql方法不匹配 则不过滤
         if(!mappedStatement.getId().matches(this.pageSqlId)){
-            invocation.proceed();
+            return invocation.proceed();
         }
         log.debug("拦截到需要分页的Sql,ID为：{}" , mappedStatement.getId());
         //如果未传入分页对象不过滤
         if(rowBounds == null || rowBounds  == RowBounds.DEFAULT){
-            invocation.proceed();
+            return invocation.proceed();
         }
         //如果传入的rowBounds不是自定义的子类不过滤
         if(!(rowBounds instanceof  BindedRowBounds)){
-            invocation.proceed();
+            return invocation.proceed();
         }
       //向上造型获取到 自定义分页对象
         BindedRowBounds  bindedrowBounds  =  (BindedRowBounds) rowBounds;

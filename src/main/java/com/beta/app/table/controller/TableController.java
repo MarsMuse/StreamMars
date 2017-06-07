@@ -1,5 +1,6 @@
 package com.beta.app.table.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.beta.app.table.entity.MenuInfor;
 import com.beta.app.table.service.TableService;
 import com.beta.prop.pagination.Page;
 
@@ -39,5 +41,14 @@ public class TableController {
         int limit = Integer.parseInt(request.getParameter("limit"));
         Page page = new Page(currentPage, limit);
         return tableService.getListForAreaInfor(parameter , page);
+    }
+    @RequestMapping(value="/menuinfor")
+    @ResponseBody
+    public List<MenuInfor>  getMenuInfor(){
+    	List<MenuInfor> result = null;
+    	result = this.tableService.getMenuInfor();
+    	
+    	return result;
+    	
     }
 }

@@ -221,8 +221,7 @@ var  TableByAjax    =   function(){
                 if(data){
                     result.total  =  data.totalCount;
                     result.rows = data.result;
-                }
-                else{
+                }else{
                     result.total  =  0;
                     result.rows = [];
                 }
@@ -238,7 +237,6 @@ var  TableByAjax    =   function(){
             }else{
                 dataHandler(gridHandler);
             }
-            
         };
 
         //表格控制器接口对象
@@ -260,3 +258,334 @@ var  TableByAjax    =   function(){
     };
     return tableInit;
 };
+
+
+/**
+ * 
+ *stfListMenu 菜单（浅封装了Bootstrap与SuperFish.js）
+ * 
+ * */
+
+var fmListMenu  =  function(){
+    /**
+    **默认的一些配置，此版本中开放自定义配置父级菜单右侧图标
+    **/
+    var MENU_ICON_DEFSPACE = '&nbsp;';
+    var MENU_ICON_DEFCLNAME = 'glyphicon';
+    var MENU_EXPAND_ICON_DEFCLNAME = 'fa fa-chevron-left';
+    var MENU_DEEXPAND_ICON_DEFCLNAME = 'fa fa-chevron-down';
+    var MENU_ITEM_EXPAND_ICON_DEFCLNAME = 'fa fa-caret-left';
+    var MENU_ITEM_DEEXPAND_ICON_DEFCLNAME = 'fa fa-caret-down';
+    var MENU_DEF_PID_KEY = 'parentId';
+    //默认的根节点ID
+    var ROOT_DEF_NODE_PID = '0';
+    //默认的外部菜单的容器
+    var MENU_CONTAINER_DEFID  =   "fm-list-menu";
+    //创建一个初始化对象
+    var listMenu  =   new Object();
+    
+    /**
+    *
+    **/
+
+    listMenu.init =  function(option){
+        /**
+        **初步判断
+        **/
+        if(!option.data && !option.dataHandler){
+            //如果即不传入数据，又不传入获取数据的方法，退出渲染
+            return;
+        }
+        //内部渲染菜单的函数
+        var initMenu =  function(menuData){
+            //剔除空数据
+            if(!menuData || menuData.length == 0){
+                return;
+            }
+            //简简单单才是真
+            var data = $.extend(true, {}, menuData);
+
+            //获取到自定义的父级未展开时图标
+            option.menuExpandIconClName = option.menuExpandIconClName ?
+                option.menuExpandIconClName : MENU_EXPAND_ICON_DEFCLNAME;
+            //获取到自定义的父级展开时是图标
+            option.menuDeExpandIconClName = option.menuDeExpandIconClName ?
+                option.menuDeExpandIconClName : MENU_DEEXPAND_ICON_DEFCLNAME;
+            //获取到自定义的子级未展开时图标        
+            option.menuItemExpandIconClName = option.menuItemExpandIconClName ?
+                option.menuItemExpandIconClName: MENU_ITEM_EXPAND_ICON_DEFCLNAME;
+            //获取到自定义的子级未展开时图标
+            option.menuItemDeExpandIconClName = option.menuItemDeExpandIconClName?
+                option.menuItemDeExpandIconClName : MENU_ITEM_DEEXPAND_ICON_DEFCLNAME;
+            //获取到父级目录主键属性名
+            option.pIdKey = option.pIdKey ? option.pIdKey : MENU_DEF_PID_KEY;
+            //获取到菜单外部容器ID名
+            option.menuContainerId = option.menuContainerId ? 
+                option.menuContainerId : MENU_CONTAINER_DEFID;
+            //获取到根节点ID
+            option.rootPId = option.rootPId ? option.rootPId : ROOT_DEF_NODE_PID;
+            //处理后菜单数据
+            var menuExtData = {};
+            //使用jquery创建一个菜单根元素先在内存虚拟一个DOM，等初始化结束后再渲染到页面上，加快渲染
+            var rootElement = $('<ul class="list-group st-list-menu-root"></ul>');
+            //获取到根节点的ID(最外层菜单父级ID)
+            var rootPId = option.rootPId;
+            var pIdKey = option.pIdKey;
+            //开始将后台获取到的数据进行排序
+            data  = (function(menuList){
+                if(menuList.length == 1){
+                    return;
+                }
+                //有序菜单数据容器
+                var sortedList = [];
+                //创建一个根节点
+                var rootNode = {id:rootPId};
+                //同一层级菜单集合
+                var layerList = [{node:rootNode , childList:[]}];
+                //克隆菜单数据
+                var cloneList;
+                //下一层级菜单集合
+                var nextLayerList;
+                //将结点按照顺序排列在集合中
+                var sortedInsertList =  function(list , node){
+                    var insertFlag = 0;
+                    //循环遍历到比较数组的排序字段
+                    $.each(list , function(index , value){
+                        //升序排列
+                        if(node.displayOrder < value.displayOrder){
+                            //插入到此位置
+                            list.splice(index , 0 , node);
+                            //置标志位为1
+                            insertFlag = 1;
+                            return false;
+                        }
+                    });
+                    //如果未在循环中插入
+                    if(insertFlag == 0){
+                        list.push(node);
+                    }
+
+                };
+
+                //插入子节点集合函数
+                var insertChildrenNodeList =  function(list, node, childList){
+                    if(childList.length == 0 ){
+                        return;
+                    }
+                    $.each(list , function(outerIndex , outerValue){
+                        if(node.id == outerValue.id){
+                            $.each(childList, function(innerIndex , innerValue){
+                                list.splice(outerIndex+innerIndex+1 , 0 , innerValue);
+                            });
+                            return false;
+                        }
+
+                    });
+                };
+
+                //逐层分解数据
+                var dealData = function(){
+
+                    cloneList = [];
+                    nextLayerList = [];
+                    //循环遍历传入的数据
+                    $.each(menuList ,function(outerIndex , outerValue){
+                        //设置寻找到的标志位
+                        var findFlag = 0 ;
+                        $.each(layerList , function(innerIndex , innerValue){
+                            //如果上层结点的ID是下层节点的父级ID则将此数据插入的该节点的子节点集合中
+                            if(innerValue.node.id == outerValue[pIdKey]){
+                                nextLayerList.push({node:outerValue , childList:[]});
+                                sortedInsertList(innerValue.childList , outerValue);
+                                findFlag = 1 ;
+                                return false;
+                            }
+
+                        });
+                        //如果不属于上层的子节点，则放入备份集合中
+                        if(findFlag == 0){
+                            cloneList.push(outerValue);
+                        }
+
+                    });
+                    //如果还没有值，表示此时需要存入真正的最外层菜单
+                    if(sortedList.length == 0 ){
+                        $.each(layerList[0].childList , function(index , value){
+                            sortedList.push(value);
+                        });
+                    }else{
+                        //若已经存在了，则需要逐层存入
+                        $.each(layerList , function(index , value){
+                            insertChildrenNodeList(sortedList , value.node , value.childList);
+                        });
+                    }
+
+                    //层级交替
+                    layerList = nextLayerList;
+                    //从备份集合中获取需要分配的数据
+                    menuList = cloneList;
+                };
+                //逐层往下遍历，获取到菜单在内存中的dom
+                while(layerList.length >0){
+                    dealData();
+                }
+                console.log(sortedList);
+                return sortedList;
+            })(data);
+            //数据处理结束，开始通过虚拟DOM拼接菜单
+            var menuItemStack = [];
+            $.each(data , function(index , value){
+                var stackLength = menuItemStack.length;
+                if(stackLength == 0 ){
+                    menuItemStack.push(value);
+                }else{
+                    //上一轮菜单的
+                    var menuDom;
+                    //图标
+                    var menuIconClName = menuItemStack[stackLength-1].icon;
+                    //图标的空格
+                    var menuIconSpace = '';
+                    //菜单缩进
+                    var menuIndentSpace = '';
+                    //当前未展开的图标
+                    var menuExpandIconClName;
+                    //当前展开的图标
+                    var menuDeExpandIconClName;
+                    if(menuIconClName == undefined || menuIconClName ==''){
+                        //没有图标信息的菜单
+                        menuIconClName = MENU_ICON_DEFCLNAME;   
+                        menuIconSpace = MENU_ICON_DEFSPACE;
+                    }
+                    //子菜单对于父菜单缩进
+                    if(stackLength >2) {
+                        for(var i=0; i<stackLength-2; i++){
+                            menuIndentSpace += '&nbsp;';
+                        }
+                    }
+                    //预设父菜单应用的右侧图标
+                    if(stackLength === 1){
+                        menuExpandIconClName = option.menuExpandIconClName;
+                        menuDeExpandIconClName = option.menuDeExpandIconClName;
+                    }else{
+                        menuExpandIconClName = option.menuItemExpandIconClName;
+                        menuDeExpandIconClName = option.menuItemDeExpandIconClName;
+                    }
+                    //判定如果下一级菜单是本级菜单的子菜单则预先添加面板
+                    if(value[pIdKey] == menuItemStack[stackLength-1].id){
+
+                        menuDom = $('<li class="list-group-item st-list-menu-container"><div class="panel panel-default"><div class="panel-heading"  onclick="changeExpandByMenu(event,\'expend_id_'+index+'\' ,\''+menuExpandIconClName+'\',\''+menuDeExpandIconClName+'\')"  onmouseenter="addIndicatorActive(\'indicator_id_'+index+'\')"   onmouseleave="removeIndicatorActive(\'indicator_id_'+index+'\')"  ><div  id="indicator_id_'+index+'" class="indicator" >&nbsp;</div><div class="menu-item"> <span class="'  + MENU_ICON_DEFCLNAME + '">' + menuIndentSpace + '</span><span class="'+ menuIconClName + '">' + menuIconSpace + '</span> &nbsp;' + menuItemStack[stackLength-1].name +'<span id="expend_id_'+index+'" class="pull-right glyphicon" ></span></div> </div><div class="panel-body collapse" collapse="true"><ul class="list-group"></ul></div></div></li>');
+                        //将自身的DOM备份起来
+                        menuItemStack[stackLength-1].menuDomTemp = menuDom;
+                        if(stackLength>1){
+                            menuItemStack[stackLength-2].menuDomTemp.children('.panel').children('.panel-body').children('.list-group').append(menuDom);
+                        }
+                        else{
+                            rootElement.append(menuDom);
+                        }
+                        //将下一菜单加入到栈中
+                        menuItemStack.push(value);
+
+                    }else{//如果已经是最底层菜单则直接加跳转元素
+                        menuDom = $('<li class="list-group-item" onmouseenter="addIndicatorActive(\'indicator_id_'+index+'\')"   onmouseleave="removeIndicatorActive(\'indicator_id_'+index+'\')"  onclick="menuClick(\'indicator_id_'+index+'\',  \'' + menuItemStack[stackLength-1].url +'\')"><div id="indicator_id_'+index+'" class="indicator" >&nbsp;</div><div class="menu-item"><span class="' + MENU_ICON_DEFCLNAME + '">' + menuIndentSpace + '</span><span class="' + menuIconClName + '">' + menuIconSpace + '</span> &nbsp;' + menuItemStack[stackLength-1].name + '</div></li>');
+                        //将自身的DOM备份起来
+                        menuItemStack[stackLength-1].menuDomTemp = menuDom;
+                        if(stackLength>1){
+                            menuItemStack[stackLength-2].menuDomTemp.children('.panel').children('.panel-body').children('.list-group').append(menuDom);
+                        }
+                        else{
+                            rootElement.append(menuDom);
+                        }
+                        //如果本层结束了DOM加载，逐级网上返，继续加载剩余DOM
+                        while(menuItemStack.length >0){
+                            if(menuItemStack[menuItemStack.length-1].id == value[pIdKey]){
+                                break;
+                            }
+                            menuItemStack.pop();
+                        }
+                        //加入下一级菜单，继续加载
+                        menuItemStack.push(value);
+                    }
+                }
+            });
+
+            //剩余的栈中长度
+            var lastStackLength  =  menuItemStack.length;
+            //如果栈中还剩余节点则继续处理
+            if(lastStackLength > 0){
+                //获取到图标
+                var menuDom;
+                var index = data.length;
+                var menuIconClName = menuItemStack[lastStackLength-1].icon;
+                var menuIconSpace = '';
+                var menuIndentSpace = '';   //菜单缩进
+                if(menuIconClName === undefined || menuIconClName === ''){
+                    menuIconClName = MENU_ICON_DEFCLNAME;   //没有图标信息的菜单
+                    menuIconSpace = MENU_ICON_DEFSPACE;
+                }
+                if(lastStackLength >2) {
+                    for(var i=0; i<lastStackLength-2; i++){
+                        menuIndentSpace += '&nbsp;';
+                    }
+                }
+                menuDom=$('<li class="list-group-item" onmouseenter="addIndicatorActive(\'indicator_id_'+index+'\')"   onmouseleave="removeIndicatorActive(\'indicator_id_'+index+'\')"  onclick="menuClick(\'indicator_id_'+index+'\', \'' + menuItemStack[lastStackLength-1].url +'\')"><div id="indicator_id_'+index+'" class="indicator" >&nbsp;</div><div class="menu-item"><span class="' + MENU_ICON_DEFCLNAME + '">' + menuIndentSpace + '</span><span class="' + menuIconClName + '">' + menuIconSpace + '</span> &nbsp;' + menuItemStack[lastStackLength-1].name + '</div></li>');
+                //将自身的DOM备份起来
+                menuItemStack[lastStackLength-1].menuDomTemp = menuDom;
+                if(lastStackLength>1){
+                    menuItemStack[lastStackLength-2].menuDomTemp.children('.panel').children('.panel-body').children('.list-group').append(menuDom);
+                }
+                else{
+                    rootElement.append(menuDom);
+                }
+            }
+
+            console.log(rootElement);
+            
+            //将#号去掉，规避在传入option.menuContainerId时将#传入出现错误
+            while(option.menuContainerId.search("#") != -1){
+                option.menuContainerId = option.menuContainerId.replace("#","");
+            }
+            $("#"+option.menuContainerId).append(rootElement);
+            
+            $("#"+option.menuContainerId).children('.st-list-menu-root').superfish();
+        };
+
+
+        /***********************************************************************/
+        /**************************开始渲染菜单*********************************/
+        /***********************************************************************/
+
+        //如果直接传入的数据则将数据初始化
+        if(option.data){
+            initMenu(option.data);
+        }else{
+            //获取到数据处理函数
+            var  dataHandler = option.dataHandler;
+            //配置回调函数
+            var menuData = function(data){
+                initMenu(data);
+            };
+            //从后台请求数据
+            dataHandler(menuData);
+        }
+    };
+    return listMenu;
+
+};
+
+var  addIndicatorActive  =  function(id){
+    $("#"+id).addClass("active");
+}
+var  removeIndicatorActive  =  function(id){
+    $("#"+id).removeClass("active");
+}
+
+var changeExpandByMenu= function(event , id , expend , deexpend){
+    $("#"+id).toggleClass(expend).toggleClass(deexpend);
+    console.log($(event)[0].target);
+}
+var menuClick = function(id , url){
+    $(".st-list-menu-root").find('.indicator.selected').removeClass('selected');
+    $("#"+id).addClass('selected');
+    console.log(url);
+}
+

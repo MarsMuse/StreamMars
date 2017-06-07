@@ -31,6 +31,7 @@
       <div class="left-menu-content-slef">
         <div>
         菜单
+            <div  id="fm-list-menu"></div>
         </div>
       </div>
       
@@ -101,7 +102,22 @@
                    console.log("获取数据异常")
                }); 
            };
+           
+           
+           
+           getMenuData = function(menuList){
+               
+               $.ajax({
+                   url:"http://127.0.0.1:8080/StreamMars/action/tablecontroller/menuinfor",
+                   method:"post",
+                   dataType:"json"
+               }).success(menuList).error(function(){
+                   console.log("获取数据异常")
+               }); 
+           };
           
+           var menu = new fmListMenu();
+           menu.init({dataHandler:getMenuData});
            //表格渲染对象
              var tba = new TableByAjax();
              //渲染参数

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.beta.app.table.dao.TableDao;
 import com.beta.app.table.entity.AreaInfor;
+import com.beta.app.table.entity.MenuInfor;
 import com.beta.prop.pagination.BindedRowBounds;
 import com.beta.prop.pagination.Page;
 
@@ -26,5 +27,13 @@ public class TableService {
         result.put("result", data);
         result.put("totalCount", rowBounds.getPage().getTotalRecords());
         return result;
+    }
+    
+    public List<MenuInfor>  getMenuInfor(){
+    	List<MenuInfor> result = null;
+    	result = this.tableDao.getMenuInfor();
+    	
+    	return result;
+    	
     }
 }
