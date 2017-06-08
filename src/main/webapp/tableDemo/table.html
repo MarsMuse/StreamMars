@@ -10,7 +10,7 @@
 
     <link  rel="stylesheet"  href="js/bootstrap/3.3.7/css/bootstrap.min.css" >
     <link  rel="stylesheet"  href="js/bootstrap-table/1.11.1/dist/bootstrap-table.min.css" rel="stylesheet">
-    <link  rel="stylesheet"  href="js/superfish/1.7.9/css/superfish.css" rel="stylesheet">
+    <link  rel="stylesheet"  href="js/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
     <link href="css/main-monkey.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,11 +28,9 @@
       <li class="active">列表页面</li>
     </ol>
     
-      <div class="left-menu-content-slef">
-        <div>
-        菜单
-            <div  id="fm-list-menu"></div>
-        </div>
+      <div class="left-menu-content-slef" >
+        <div style="height: 100%;"  id="fm-list-menu"></div>
+        &nbsp;
       </div>
       
       
@@ -117,7 +115,7 @@
            };
           
            var menu = new fmListMenu();
-           menu.init({dataHandler:getMenuData});
+           menu.init({});
            //表格渲染对象
              var tba = new TableByAjax();
              //渲染参数

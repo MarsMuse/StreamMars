@@ -184,6 +184,7 @@ var  TableByAjax    =   function(){
 
     //对表格进行初始化
     tableInit.grid = function(id , tbControl){
+        //表格ID
         var tableId = id;
         //判断表格是否存在
         if(!tableId) {
@@ -230,6 +231,7 @@ var  TableByAjax    =   function(){
             };
             //调用传入的数据处理器通过配置的分页端
             if(defControl.sidePagination === 'server'){
+                
                 var paramData = JSON.parse(params.data);
                 var currentPage = paramData.offset / paramData.limit + 1;
                 var page = new FmPage(currentPage, paramData.limit);
@@ -244,8 +246,7 @@ var  TableByAjax    =   function(){
         
         //向外界提供查询按钮函数
         gridController.query = function(){
-            
-            $("#"+tableId).bootstrapTable("refresh");
+            $("#"+tableId).bootstrapTable('selectPage' , 1);
         };
         
         gridController.getSelections = function(){
@@ -272,10 +273,11 @@ var fmListMenu  =  function(){
     **/
     var MENU_ICON_DEFSPACE = '&nbsp;';
     var MENU_ICON_DEFCLNAME = 'glyphicon';
-    var MENU_EXPAND_ICON_DEFCLNAME = 'fa fa-chevron-left';
-    var MENU_DEEXPAND_ICON_DEFCLNAME = 'fa fa-chevron-down';
-    var MENU_ITEM_EXPAND_ICON_DEFCLNAME = 'fa fa-caret-left';
-    var MENU_ITEM_DEEXPAND_ICON_DEFCLNAME = 'fa fa-caret-down';
+    var MENU_EXPAND_ICON_DEFCLNAME = 'fa-chevron-left';
+    var MENU_DEEXPAND_ICON_DEFCLNAME = 'fa-chevron-down';
+    var MENU_ITEM_EXPAND_ICON_DEFCLNAME = 'fa-caret-left';
+    var MENU_ITEM_DEEXPAND_ICON_DEFCLNAME = 'fa-caret-down';
+    var MENU_ICONCL_NAME = "glyphicon glyphicon-th-list";
     var MENU_DEF_PID_KEY = 'parentId';
     //默认的根节点ID
     var ROOT_DEF_NODE_PID = '0';
@@ -284,16 +286,25 @@ var fmListMenu  =  function(){
     //创建一个初始化对象
     var listMenu  =   new Object();
     
+    
     /**
     *
     **/
 
     listMenu.init =  function(option){
+        
+        
         /**
         **初步判断
         **/
+        if(!option){
+            console.error("调用此服务必须提供option");
+            return;
+        }
+        
         if(!option.data && !option.dataHandler){
             //如果即不传入数据，又不传入获取数据的方法，退出渲染
+            console.error("调用此服务必须提供数据处理器接口(dataHandler)或者数据(data)");
             return;
         }
         //内部渲染菜单的函数
@@ -429,7 +440,6 @@ var fmListMenu  =  function(){
                 while(layerList.length >0){
                     dealData();
                 }
-                console.log(sortedList);
                 return sortedList;
             })(data);
             //数据处理结束，开始通过虚拟DOM拼接菜单
@@ -442,7 +452,7 @@ var fmListMenu  =  function(){
                     //上一轮菜单的
                     var menuDom;
                     //图标
-                    var menuIconClName = menuItemStack[stackLength-1].icon;
+                    var menuIconClName = menuItemStack[stackLength-1].icon ?  menuItemStack[stackLength-1].icon : MENU_ICONCL_NAME;
                     //图标的空格
                     var menuIconSpace = '';
                     //菜单缩进
@@ -472,8 +482,11 @@ var fmListMenu  =  function(){
                     }
                     //判定如果下一级菜单是本级菜单的子菜单则预先添加面板
                     if(value[pIdKey] == menuItemStack[stackLength-1].id){
-
-                        menuDom = $('<li class="list-group-item st-list-menu-container"><div class="panel panel-default"><div class="panel-heading"  onclick="changeExpandByMenu(event,\'expend_id_'+index+'\' ,\''+menuExpandIconClName+'\',\''+menuDeExpandIconClName+'\')"  onmouseenter="addIndicatorActive(\'indicator_id_'+index+'\')"   onmouseleave="removeIndicatorActive(\'indicator_id_'+index+'\')"  ><div  id="indicator_id_'+index+'" class="indicator" >&nbsp;</div><div class="menu-item"> <span class="'  + MENU_ICON_DEFCLNAME + '">' + menuIndentSpace + '</span><span class="'+ menuIconClName + '">' + menuIconSpace + '</span> &nbsp;' + menuItemStack[stackLength-1].name +'<span id="expend_id_'+index+'" class="pull-right glyphicon" ></span></div> </div><div class="panel-body collapse" collapse="true"><ul class="list-group"></ul></div></div></li>');
+                        //折叠面板对象
+                        var  collapse = {};
+                        //面板ID
+                        collapse.id  = "collapse_"+index;
+                        menuDom = $('<li class="list-group-item st-list-menu-container"><div class="panel panel-default"><div class="panel-heading"  onclick="changeExpandByMenu(\''+collapse.id+'\',\'expend_id_'+index+'\' ,\''+option.menuExpandIconClName+'\',\''+option.menuDeExpandIconClName+'\',\''+option.menuItemExpandIconClName+'\',\''+option.menuItemDeExpandIconClName+'\')"  onmouseenter="addIndicatorActive(\'indicator_id_'+index+'\')"   onmouseleave="removeIndicatorActive(\'indicator_id_'+index+'\')"  ><div  id="indicator_id_'+index+'" class="indicator" >&nbsp;</div><div class="menu-item"> <span class="'  + MENU_ICON_DEFCLNAME + '">' + menuIndentSpace + '</span><span class="'+ menuIconClName + '">' + menuIconSpace + '</span> &nbsp;' + menuItemStack[stackLength-1].name +'<span id="expend_id_'+index+'" class="pull-right glyphicon fm-pull-right-icon  fa  '+menuDeExpandIconClName+' " ></span></div> </div><div class="panel-body fm-collapse-flag  collapse"  id="'+collapse.id+'"   collapse="true"><ul class="list-group"></ul></div></div></li>');
                         //将自身的DOM备份起来
                         menuItemStack[stackLength-1].menuDomTemp = menuDom;
                         if(stackLength>1){
@@ -538,22 +551,17 @@ var fmListMenu  =  function(){
                 }
             }
 
-            console.log(rootElement);
-            
             //将#号去掉，规避在传入option.menuContainerId时将#传入出现错误
             while(option.menuContainerId.search("#") != -1){
                 option.menuContainerId = option.menuContainerId.replace("#","");
             }
             $("#"+option.menuContainerId).append(rootElement);
             
-            $("#"+option.menuContainerId).children('.st-list-menu-root').superfish();
         };
-
 
         /***********************************************************************/
         /**************************开始渲染菜单*********************************/
         /***********************************************************************/
-
         //如果直接传入的数据则将数据初始化
         if(option.data){
             initMenu(option.data);
@@ -569,23 +577,69 @@ var fmListMenu  =  function(){
         }
     };
     return listMenu;
-
 };
 
 var  addIndicatorActive  =  function(id){
     $("#"+id).addClass("active");
-}
+};
 var  removeIndicatorActive  =  function(id){
     $("#"+id).removeClass("active");
-}
+};
 
-var changeExpandByMenu= function(event , id , expend , deexpend){
-    $("#"+id).toggleClass(expend).toggleClass(deexpend);
-    console.log($(event)[0].target);
-}
+//展开与关闭菜单
+var changeExpandByMenu= function(collapseId , id , expend , deexpend,itemExpend , itemDeexpend){
+    //修改样式
+    if($("#"+id).hasClass(expend) || $("#"+id).hasClass(deexpend)){
+        $("#"+id).toggleClass(expend).toggleClass(deexpend);
+    }
+    else{
+        $("#"+id).toggleClass(itemExpend).toggleClass(itemDeexpend);
+    }
+    
+    $("#"+collapseId).slideToggle();
+    //获取这个菜单的父级菜单的ID（这些菜单不改变）
+    var parentCollapseList=[collapseId];
+    $.each($("#"+collapseId).parents(".fm-collapse-flag") , function(index , value){
+        parentCollapseList.push($(value).attr("id"));
+    });
+    //获取到该菜单全部的父级菜单ID
+    var allCollapseList=[];
+    $.each($(".st-list-menu-root").find(".fm-collapse-flag") , function(index , value){
+        allCollapseList.push($(value).attr("id"));
+    });
+    //获取到需要处理的ID集合
+    for(var i = 0 ; i <allCollapseList.length ; i++){
+        for(var j = 0 ; j < parentCollapseList.length ; j++){
+            if(allCollapseList[i] == parentCollapseList[j]){
+                allCollapseList.splice(i ,1);
+                i--;
+                parentCollapseList.splice(j ,1);
+                j--;
+                break;
+            }
+        }
+        if( parentCollapseList.length ==0){
+            break;
+        }
+    }
+    for(var i = 0 ; i < allCollapseList.length ; i++){
+        var tempId = allCollapseList[i];
+        if($("#"+tempId).is(':visible')){
+            $("#"+tempId).slideUp();
+            var iconIdIndex = "expend_id_"+tempId.replace("collapse_","");
+            //var iconObj = $("#"+id).siblings(".panel-heading").find(".fm-pull-right-icon");
+            var iconObj = $("#"+iconIdIndex);
+            if(iconObj.hasClass(expend)){
+                iconObj.removeClass(expend).addClass(deexpend);
+            }else if(iconObj.hasClass(itemExpend)){
+                iconObj.removeClass(itemExpend).addClass(itemDeexpend);
+            }
+        }
+    }
+};
 var menuClick = function(id , url){
     $(".st-list-menu-root").find('.indicator.selected').removeClass('selected');
     $("#"+id).addClass('selected');
-    console.log(url);
-}
+    
+};
 
