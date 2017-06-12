@@ -115,7 +115,7 @@
            };
           
            var menu = new fmListMenu();
-           menu.init({});
+           menu.init({dataHandler : getMenuData});
            //表格渲染对象
              var tba = new TableByAjax();
              //渲染参数
@@ -125,27 +125,39 @@
                  toolbar : '#toolbar1',
                  //resizable:true, //注：如果要求启用resizable 一定要将paginationVAlign设置为top，否则在部分版本的chrome中出现table水平滚动轴与分页栏部分重合的情况
                  columns : [
+                           
                            {
                                field: 'checked',
+                               width:"40px",
                                checkbox: true ,//注 ： 若是单选则为radio:true，并且将tbOptions.clickToSelect :true
                                class:"check-middle-td" // 注：由于td内部子元素的影响 valign:'middle'这种居中方式无效 需要自己写一个class 在此引入，即可规避该 td的纵向居中问题
                            },
+                           {
+                               title: 'Number',//标题  可不加  
+                               width:"200px",
+                               formatter: function (value, row, index) {  
+                                   return index+1;  
+                               }
+                           },
                           {
                               field: 'areaCode',
+                              width:"800px",
                               title: '区域编码'
                           },
                           {
                               field: 'areaName',
+                              width:"800px",
                               title: '区域名称'
                           },
                           {
                               field: 'areaPath',
+                              width:"800px",
                               title: '区域路径'
                           },
                           {
                               field: 'areaCode',
                               title: '操作',
-                              width:"16%",
+                              width:"200px",
                               formatter:function(value , rowEntity , index){
                                   
                                   return'<button type="button" class="btn btn-success  btn-sm  "  onclick="editData(\''+value+'\')"   style="margin-right:12px;"><span  class="glyphicon glyphicon-edit  table-span-icon"></span>修改</button>'
