@@ -213,7 +213,7 @@ public class PaginationIntercepter implements Interceptor {
     /**
      * 
      * @Title: dealSQL   
-     * @Description: TODO(对传入的Sql进行预处理)   
+     * @Description: (对传入的Sql进行预处理)   
      * @param: @param originalSql      
      * @return: void      
      * @throws
