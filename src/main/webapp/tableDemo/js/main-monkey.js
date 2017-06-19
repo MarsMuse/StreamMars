@@ -181,7 +181,7 @@ var  TableByAjax    =   function(){
     
     //新建一个表格初始化对象
     var  tableInit = new Object();
-
+    tableInit.currentOffset = 0 ;
     //对表格进行初始化
     tableInit.grid = function(id , tbControl){
         //表格ID
@@ -235,6 +235,8 @@ var  TableByAjax    =   function(){
                 var paramData = JSON.parse(params.data);
                 var currentPage = paramData.offset / paramData.limit + 1;
                 var page = new FmPage(currentPage, paramData.limit);
+                tableInit.currentOffset = paramData.offset;
+                console.log(tableInit.currentOffset);
                 dataHandler(gridHandler , page);
             }else{
                 dataHandler(gridHandler);

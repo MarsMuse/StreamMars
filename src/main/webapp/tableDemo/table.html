@@ -125,7 +125,14 @@
                  toolbar : '#toolbar1',
                  //resizable:true, //注：如果要求启用resizable 一定要将paginationVAlign设置为top，否则在部分版本的chrome中出现table水平滚动轴与分页栏部分重合的情况
                  columns : [
-                           
+                                {
+                                    title: '序号',//标题  可不加  
+                                    width:"60px",
+                                    formatter: function (value, row, index) {  
+                                        console.log(tba.currentOffset);
+                                        return tba.currentOffset+index+1;
+                                    }
+                                },
                            {
                                field: 'checked',
                                width:"40px",
