@@ -645,3 +645,359 @@ var menuClick = function(id , url){
     
 };
 
+
+
+
+/*******************************************************************************/
+/**********************************全局的日期格式转换函数***************************/
+/******************************************************************************/
+
+
+//日期转换函数
+function globalDateFormat(jsonDate , dateMatch) {
+    if(!jsonDate || jsonDate==''){
+        return "";
+    }
+    //json日期格式转换为正常格式
+    //此处用到toString（）是为了让传入的值为字符串类型，目的是为了避免传入的数据类型不支持.replace（）方法
+    var jsonDateStr = jsonDate.toString();
+    //console.log(jsonDateStr);
+    try {
+        var k = parseInt(jsonDateStr.replace("/Date(", "").replace(")/", ""), 10);
+        if (k < 0) 
+            return "";
+
+        var date = new Date(parseInt(jsonDateStr.replace("/Date(", "").replace(")/", ""), 10));
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        var milliseconds = date.getMilliseconds();
+
+        if(dateMatch){
+          //转化为大写
+          dateMatch = dateMatch.toUpperCase();
+          //替换年
+          if(dateMatch.search("YYYY") != -1){
+            dateMatch = dateMatch.replace("YYYY",year);
+          }else if(dateMatch.search("YYY") != -1){
+            dateMatch = dateMatch.replace("YYY",year.toString().substring(1));
+          }else if(dateMatch.search("YY") != -1){
+            dateMatch = dateMatch.replace("YY",year.toString().substring(2));
+          }else if(dateMatch.search("Y") != -1){
+            dateMatch = dateMatch.replace("Y",year.toString().substring(3));
+          }
+          //替换月
+          if(dateMatch.search("MM") != -1){
+            dateMatch = dateMatch.replace("MM",month);
+          }
+          //替换日期
+          if(dateMatch.search("DD") != -1){
+            dateMatch = dateMatch.replace("DD",day);
+          }
+          //替换小时
+          if(dateMatch.search("HH") != -1){
+            dateMatch = dateMatch.replace("HH",hours);
+          }else if(dateMatch.search("HH24") != -1){
+            dateMatch = dateMatch.replace("HH24",hours);
+          }else if(dateMatch.search("HH12") != -1){
+            dateMatch = dateMatch.replace("HH12",hours);
+          }
+          //替换分钟
+          if(dateMatch.search("MI")!= -1){
+            dateMatch = dateMatch.replace("MI",minutes);
+          }
+          //替换秒
+          if(dateMatch.search("SS")!= -1){
+            dateMatch = dateMatch.replace("SS",seconds);
+          }
+          return dateMatch;
+
+        }else{
+          //返回默认的格式
+          return  year+ "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+        }
+    }
+    catch (ex) {
+        return "时间格式转换错误";
+    }
+};
+
+/*******************************************************************************/
+/**********************************弹出一个树形菜单窗口***************************/
+/******************************************************************************/
+
+
+/**
+ * 将数据处理成有序集合方法
+ * @param data
+ */
+
+function  detailNodeInfor(dataList , root ,idKey){
+    if(!dataList || dataList.length ==0){
+        return ;
+    }
+    //获取到根节点ID
+    var rootPId = root?root:'1';
+    var pIdKey  = idKey ? idKey :'parentId';
+    if(dataList.length == 1){
+        return;
+    }
+    //有序菜单数据容器
+    var sortedList = [];
+    //创建一个根节点
+    var rootNode = {id:rootPId};
+    //同一层级菜单集合
+    var layerList = [{node:rootNode , childList:[]}];
+    //克隆菜单数据
+    var cloneList;
+    //下一层级菜单集合
+    var nextLayerList;
+    //将结点按照顺序排列在集合中
+    var sortedInsertList =  function(list , node){
+        var insertFlag = 0;
+        //循环遍历到比较数组的排序字段
+        $.each(list , function(index , value){
+            //升序排列
+            if(node.displayOrder < value.displayOrder){
+                //插入到此位置
+                list.splice(index , 0 , node);
+                //置标志位为1
+                insertFlag = 1;
+                return false;
+            }
+        });
+        //如果未在循环中插入
+        if(insertFlag == 0){
+            list.push(node);
+        }
+
+    };
+
+    //插入子节点集合函数
+    var insertChildrenNodeList =  function(list, node, childList){
+        if(childList.length == 0 ){
+            return;
+        }
+        $.each(list , function(outerIndex , outerValue){
+            if(node.id == outerValue.id){
+                $.each(childList, function(innerIndex , innerValue){
+                    list.splice(outerIndex+innerIndex+1 , 0 , innerValue);
+                });
+                return false;
+            }
+
+        });
+    };
+
+    //逐层分解数据
+    var dealData = function(){
+        cloneList = [];
+        nextLayerList = [];
+        //循环遍历传入的数据
+        $.each(dataList ,function(outerIndex , outerValue){
+            //设置寻找到的标志位
+            var findFlag = 0 ;
+            $.each(layerList , function(innerIndex , innerValue){
+                //如果上层结点的ID是下层节点的父级ID则将此数据插入的该节点的子节点集合中
+                if(innerValue.node.id == outerValue[pIdKey]){
+                    nextLayerList.push({node:outerValue , childList:[]});
+                    sortedInsertList(innerValue.childList , outerValue);
+                    findFlag = 1 ;
+                    return false;
+                }
+
+            });
+            //如果不属于上层的子节点，则放入备份集合中
+            if(findFlag == 0){
+                cloneList.push(outerValue);
+            }
+
+        });
+        //如果还没有值，表示此时需要存入真正的最外层菜单
+        if(sortedList.length == 0 ){
+            $.each(layerList[0].childList , function(index , value){
+                sortedList.push(value);
+            });
+        }else{
+            //若已经存在了，则需要逐层存入
+            $.each(layerList , function(index , value){
+                insertChildrenNodeList(sortedList , value.node , value.childList);
+            });
+        }
+
+        //层级交替
+        layerList = nextLayerList;
+        //从备份集合中获取需要分配的数据
+        dataList = cloneList;
+    };
+    
+    //逐层往下遍历，获取到菜单在内存中的dom
+    while(layerList.length >0){
+        dealData();
+    }
+    return sortedList;
+};
+
+
+
+/**
+ * 树形弹窗对象
+ */
+var  fmTreeModel  =  function(selfOption){
+    
+    if(!selfOption  || !selfOption.inputId){
+        console.error("请设置必要的参数");
+        return false;
+    }
+    var  bindId = selfOption.inputId;
+    //增加用户体验
+    $("#"+bindId).css("cursor","pointer");
+    var  tempBindData = {
+            value:'',
+            data:''
+    };
+    
+    //inputId再加上一个随机数
+    var  treeId = "tree_"+selfOption.inputId+Math.floor(Math.random()*10+1);
+    //树对象(后续用户操作选择)
+    
+    var zTreeObj  =  null;
+    //$("#content").append(treeElemnt);
+    //树形结构的数据
+    var  treeNode  =  null;
+    //设置参数
+    var setting  =  null;
+    //获取到树点击事件响应函数
+    var  bindDataToInput  =  function(event , treeId , treeNode){
+        tempBindData.value = treeNode.id;
+        tempBindData.data  = treeNode.name;
+    };
+    
+    
+    
+    //数据处理器
+    var dataHandler  =  function(data){
+        //数据进行预处理
+        treeNode  =  detailNodeInfor(data , selfOption.rootPId , selfOption.pIdKey);
+        //配置参数
+        setting= {
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey:'id',
+                    pIdKey:selfOption.pIdKey ? selfOption.pIdKey :'parentId',
+                    rootPId:selfOption.rootPId?selfOption.rootPId:'0'
+                }
+            },
+            callback: {
+                onClick: bindDataToInput
+            }
+        };
+    };
+    
+    //获取到数据请求的方法
+    var  dataHelper  =  selfOption.dataHelper?selfOption.dataHelper:officeDefaultQuery;
+    
+    //请求数据
+    dataHelper(dataHandler);
+    
+    //弹窗元素
+    var  layerElemnt  =  null;
+    
+    //处理弹窗的对象
+    var  treeOperateWindow  =  new Object();
+    
+    //开启一个弹窗
+    treeOperateWindow.open = function(){
+        if(!treeNode){
+            console.error("数据未初始化完成");
+            return false;
+        }
+        layerElemnt  =  layer.open({
+            title:selfOption.title ?selfOption.title:'组织机构信息',
+            type: 1,
+            closeBtn: 1,
+            area:['300px','480px'],
+            shadeClose: true,
+            move :false,
+            resize :false,
+            btn: ['确定', '清空', '取消'],
+            btnAlign: 'r',
+            yes: function(index, layero){
+                if(tempBindData && tempBindData.data != ''){
+                    $("#"+bindId).val(tempBindData.data);
+                    $("#"+bindId).attr("bindValue" , tempBindData.value)
+                }
+                
+                layer.close(index);
+            },
+            btn2: function(index, layero){
+                tempBindData.data = '';
+                tempBindData.value = '';
+                $("#"+bindId).val('');
+                $("#"+bindId).attr("bindValue" , '');
+            },
+            cancel: function(index, layero){ 
+               layer.close(index)
+               return false; 
+            },
+            success:function(){
+                 /*if(!zTreeObj){
+                     zTreeObj =  $.fn.zTree.init($("#"+treeId), setting, treeNode);
+                 }*/
+                 zTreeObj =  $.fn.zTree.init($("#"+treeId), setting, treeNode);
+            },
+            
+            content:'<div  style="padding:8px ;font-size:12px;"><ul  id="'+treeId+'"  class="ztree" ></ul></div>' /*<div><span>已选择：</span><span  id="treeDemoSelect"></span></div>*/
+        });
+        
+    };
+    return  treeOperateWindow;
+};
+
+
+
+/*****************************************************************/
+/**********************全局的Ajax请求预处理函数*********************/
+/****************************************************************/
+var  globalAjaxLoading  =  function(){
+    var  loadLayer  =  undefined;
+    var  loadCount  =  0;
+    
+    //发送Ajax请求绑定的函数
+    $(document).ajaxSend(function() {
+        if(!loadLayer){
+            loadLayer  =   layer.load();
+            
+        }
+        loadCount++;
+    });
+    
+    
+    //成功响应的函数
+    $(document).ajaxSuccess(function() {
+        loadCount --;
+        if(loadCount <= 0 &&  loadLayer){
+            layer.close(loadLayer);
+            loadCount = 0;
+            loadLayer  = undefined;
+        }
+    });
+    
+    
+    //响应错误的函数
+    $(document).ajaxError(function() {
+        loadCount --;
+        if(loadCount <= 0 &&  loadLayer){
+            layer.close(loadLayer);
+            loadCount = 0;
+            loadLayer  = undefined;
+        }
+    });
+    
+    
+};
+

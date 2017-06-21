@@ -14,7 +14,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
     <description>数据库连接配置</description>
     
     <!-- 配置参数文件 -->
-    <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
+    <context:property-placeholder location="classpath:config/jdbc.properties"/>
 
 
      <bean id="frameworkDataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init" destroy-method="close"> 
