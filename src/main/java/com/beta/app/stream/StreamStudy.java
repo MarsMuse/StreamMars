@@ -16,7 +16,6 @@ import java.io.Reader;
 public class StreamStudy {
     public static void main(String[] args) {
         Reader read = new BufferedReader(new InputStreamReader(System.in));
-        
         while(true){
             System.out.println("输入");
             char[] a = new char[16];
