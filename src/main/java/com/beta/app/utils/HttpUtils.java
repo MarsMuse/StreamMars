@@ -31,10 +31,11 @@ public class HttpUtils {
     public static void main(String[] args) {
         CloseableHttpClient httpClient= HttpClients.createDefault();  
         //HttpPut httpPut = new HttpPut("http://192.168.7.249:8080/zhph_loanActivity/process/testSimpleProcess");
-        HttpPost  httpPost  = new HttpPost("http://192.168.7.249:8080/zhph_loanActivity/process/task/testProcessApprovalId/262956");
+        HttpPost  httpPost  = new HttpPost("http://127.0.0.1:8080/paymentPlatform/ws/api/paymentApi/singlePayment?terminalId=D7BA9882414F4669BCECEF037F34DED9");
         
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();  
-        nvps.add(new BasicNameValuePair("result"  ,  "success"));  
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("message"  ,  "success"));  
+        nvps.add(new BasicNameValuePair("terminalId"  ,  "1000"));  
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));
         } catch (UnsupportedEncodingException e1) {

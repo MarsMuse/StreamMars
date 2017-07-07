@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:tx="http://www.springframework.org/schema/tx"
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:tx="http://www.springframework.org/schema/tx" 
+xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:jaxws="http://cxf.apache.org/jaxws" 
 xsi:schemaLocation="
-http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context.xsd
-http://www.springframework.org/schema/tx
-http://www.springframework.org/schema/tx/spring-tx.xsd">
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx.xsd 
+http://cxf.apache.org/jaxrs 
+http://cxf.apache.org/schemas/jaxrs.xsd 
+http://cxf.apache.org/jaxws 
+http://cxf.apache.org/schemas/jaxws.xsd">
 
     <description>框架核心配置</description>
     
     <context:component-scan base-package="com.beta.**.service" />
     
+    <bean id="payconcrete"  class="com.beta.api.service.impl.PaymentInterfaceImpl"></bean>
+    <jaxrs:server id="paymentInterface" address="/api" >
+        <jaxrs:serviceBeans>
+            <ref bean="payconcrete"></ref>
+        </jaxrs:serviceBeans><!-- 
+       <jaxrs:outInterceptors>
+           <ref bean="outMessageInterceptor"></ref>
+       </jaxrs:outInterceptors>
+       <jaxrs:inInterceptors>
+           <ref bean="paymentInterceptor"></ref>
+       </jaxrs:inInterceptors> -->
+    
+    <!-- 配置cxf 请求日志输出 -->
+       <jaxrs:features>
+           [b]<bean class="org.apache.cxf.feature.LoggingFeature"></bean>[/b]
+       </jaxrs:features>
+
+    </jaxrs:server>
+
 </beans>
