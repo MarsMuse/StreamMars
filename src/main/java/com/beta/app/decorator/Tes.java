@@ -5,8 +5,9 @@ import java.util.Random;
 
 import javax.xml.bind.DatatypeConverter;
 
+import com.beta.encrypt.util.SecurityAlgorithmUtil;
 
-import com.beta.app.utils.SecurityAlgorithmUtil;
+
 
 public class Tes {
     

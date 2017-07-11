@@ -1,4 +1,4 @@
-package com.beta.app.utils;
+package com.beta.encrypt.util;
 
 import java.io.UnsupportedEncodingException;
 
@@ -27,7 +27,7 @@ public final class SecurityAlgorithmUtil {
      * @param:    
      * @throws
      */
-    private SecurityAlgorithmUtil(){new RuntimeException("该类不可以创建对象");}
+    private SecurityAlgorithmUtil(){throw new RuntimeException("该类不可以创建对象");}
     
     
     /**
@@ -61,7 +61,8 @@ public final class SecurityAlgorithmUtil {
         try {
             result  =  DatatypeConverter.printBase64Binary(content.getBytes(charset));
         } catch (UnsupportedEncodingException e) {
-            new RuntimeException("提供的编码不存在，出现编码异常");
+            e.printStackTrace();
+            throw new RuntimeException("提供的编码不存在，出现编码异常");
         }
         return result;
     }
@@ -97,35 +98,47 @@ public final class SecurityAlgorithmUtil {
         try {
             result  =  new String (DatatypeConverter.parseBase64Binary(content) , charset);
         } catch (UnsupportedEncodingException e) {
-            new RuntimeException("提供的编码不存在，出现编码异常");
+            e.printStackTrace();
+            throw new RuntimeException("提供的编码不存在，出现编码异常");
         }
         return result;
     }
     
     /**
      * 
-     * @Title: parseBase64Binary   
-     * @Description: (字符串转换成byteArray)   
-     * @param: @param content
-     * @param: @return      
-     * @return: byte[]      
-     * @throws
-     */
-    public static  byte[]  parseBase64Binary(String content){
-        return  DatatypeConverter.parseBase64Binary(content);
-    }
-    
-    /**
-     * 
-     * @Title: printBase64Binary   
-     * @Description: (byteArray转换成字符串)   
+     * @Title: byteArrayConvertToHexString   
+     * @Description: (byte数组转换成HEX字符串)   
      * @param: @param byteArray
      * @param: @return      
      * @return: String      
      * @throws
      */
-    public static  String  printBase64Binary(byte[] byteArray){
-        
-        return  DatatypeConverter.printBase64Binary(byteArray);
+    public static  String  byteArrayConvertToHexString(byte[]  byteArray){
+        if(byteArray == null || byteArray.length ==0){
+            return null;
+        }
+        StringBuilder  stringBuilder = new StringBuilder();
+        for(byte  info : byteArray){
+            String  hexString = Integer.toHexString(0xFF & info);
+            stringBuilder.append(hexString.length() == 1 ? Integer.valueOf(0):"").append(hexString);
+        }
+        return  stringBuilder.toString();
+    }
+    
+    /**
+     * 
+     * @Title: hexStringConvertToByteArray   
+     * @Description: (HEX字符串转换成为byte数组)   
+     * @param: @param hexString
+     * @param: @return      
+     * @return: byte[]      
+     * @throws
+     */
+    public  static byte[]  hexStringConvertToByteArray(String  hexString){
+        byte[]  result  =  new byte[hexString.length()/2];
+        for(int i = 0 ; i<result.length ; i++){
+            result[i]  =  (byte) Integer.parseInt(hexString.substring(i*2, i*2+2), 16);
+        }
+        return result;
     }
 }
