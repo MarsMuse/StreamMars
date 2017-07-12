@@ -1,5 +1,6 @@
 package com.beta.encrypt.test;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -113,7 +114,7 @@ public class Test {
         System.out.println(System.currentTimeMillis() -endTime );
         System.out.println(source.equals(deInfo));*/
         
-        Executor exe = Executors.newFixedThreadPool(1000);
+/*        Executor exe = Executors.newFixedThreadPool(1000);
         for(int i  = 0 ;i<10000;  i++ ){
         	final  int temp = i;
             exe.execute(new Runnable() {
@@ -146,6 +147,24 @@ public class Test {
                     
                 }
             });
+        }*/
+    	
+    	
+    	
+    	String sou= "0123456789.*-+qweertyuiopasldfkgjhmzxncbv";
+        char[]  da = sou.toCharArray();
+        StringBuffer  sb =  new StringBuffer();
+        Random ran = new Random();
+        for(int i = 0 ; i<10000; i++){
+            sb.append(da[ran.nextInt(da.length)]);
+            
         }
+        String source = sb.toString();
+        try {
+			System.out.println(sou.getBytes("UTF-8").length);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

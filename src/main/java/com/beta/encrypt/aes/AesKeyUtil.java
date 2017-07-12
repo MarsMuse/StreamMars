@@ -1,5 +1,6 @@
 package com.beta.encrypt.aes;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,7 +37,12 @@ public class AesKeyUtil {
      */
     public  static  Key  getSecurityKey(String  sourceKey){
         Key  key = null;
-        byte[]  sourceArray  =  sourceKey.getBytes();
+        byte[] sourceArray =  null;
+        try {
+            sourceArray = sourceKey.getBytes(AesConstant.CHAR_SET_DEF);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         key = getSecurityKey(sourceArray);
         return  key;
     }

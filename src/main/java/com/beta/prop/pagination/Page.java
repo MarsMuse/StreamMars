@@ -17,7 +17,7 @@ public class Page {
     /**
      * 
      * @Title:  Page   
-     * @Description:    TODO(无参构造器)   
+     * @Description:(无参构造器)   
      * @param:    
      * @throws
      */
@@ -26,7 +26,7 @@ public class Page {
     /**
      * 
      * @Title:  Page   
-     * @Description:    TODO(有参构造器)   
+     * @Description:(有参构造器)   
      * @param:  @param cuurentPage
      * @param:  @param limit  
      * @throws
@@ -39,7 +39,7 @@ public class Page {
     /**
      * 
      * @Title: refresh   
-     * @Description: TODO(刷新分页信息)   
+     * @Description: (刷新分页信息)   
      * @param:       
      * @return: void      
      * @throws
@@ -103,7 +103,4 @@ public class Page {
     public void setLimit(int limit) {
         this.limit = limit;
     }
-    
-    
-    
 }
