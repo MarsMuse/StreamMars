@@ -12,7 +12,7 @@ package com.beta.encrypt.rsa;
  */
 public class RsaConstant {
     //默认字符集
-    public final static String  ENCODE_DEF="UTF-8";
+    public final static String  CHAR_SET_DEF="UTF-8";
     //默认加密算法
     public final static String  RSA_ALGORITHM = "RSA";
     //keySotre类型

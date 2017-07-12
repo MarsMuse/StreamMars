@@ -30,160 +30,7 @@ import com.beta.encrypt.util.SecurityAlgorithmUtil;
  */
 public class RsaEncrypt {
     
-    /**
-     * 
-     * @Title: encryptByPrivateKey   
-     * @Description: (通过密钥加密数据)   
-     * @param: @param sourceData
-     * @param: @param privateKey
-     * @param: @return      
-     * @return: byte[]      
-     * @throws
-     */
-    public static  byte[]  encryptByPrivateKey(byte[]  sourceData  ,  PrivateKey  privateKey){
-        byte[]  result = null;
-        
-        try {
-            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, privateKey);
-            int blockSize = getPrivateKeySize(privateKey) -11;
-            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
-                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
-                result = concatByteArray(temp, result);
-            }
-            //result =  cipher.doFinal(sourceData);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("获取加密对象出现异常");
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-            throw new RuntimeException("校验秘钥出现异常");
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-            throw new RuntimeException("加密数据出现异常");
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("加密数据出现异常");
-        }
-        return result;
-    }
     
-    /**
-     * 
-     * @Title: decryptByPublicKey   
-     * @Description: (通过公钥解密数据)   
-     * @param: @param sourceData
-     * @param: @param publicKey
-     * @param: @return      
-     * @return: byte[]      
-     * @throws
-     */
-    public  static  byte[]  decryptByPublicKey(byte[]  sourceData  ,  PublicKey  publicKey){
-        byte[]  result  =  null;
-        try {
-            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-            cipher.init(Cipher.DECRYPT_MODE, publicKey);
-            int blockSize = getPublicKeySize(publicKey);
-            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
-                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
-                result = concatByteArray(temp, result);
-            }
-            //result =  cipher.doFinal(sourceData);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("获取加密对象出现异常");
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-            throw new RuntimeException("校验秘钥出现异常");
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-            throw new RuntimeException("加密数据出现异常");
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("加密数据出现异常");
-        }
-        return result;
-    }
-    
-    /**
-     * 
-     * @Title: encryptData   
-     * @Description: (加密数据)   
-     * @param: @param sourceData
-     * @param: @param privateKey
-     * @param: @return      
-     * @return: String      
-     * @throws
-     */
-    public  static String  encryptData(String  sourceData , PrivateKey privateKey){
-        String  result = null;
-        byte[] data = null;
-        try {
-            data = encryptByPrivateKey(sourceData.getBytes("UTF-8") , privateKey);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("字符集出现异常");
-        }
-        result  =  SecurityAlgorithmUtil.byteArrayConvertToHexString(data);
-        return result;
-    }
-    
-    /**
-     * 
-     * @Title: encryptData   
-     * @Description: (从本地密钥库获取密钥加密数据)   
-     * @param: @param sourceData
-     * @param: @param keyStorePath
-     * @param: @param alias
-     * @param: @param password
-     * @param: @return      
-     * @return: String      
-     * @throws
-     */
-    public  static String  encryptData(String  sourceData ,String  keyStorePath , String alias ,  String password){
-        String  result = null;
-        PrivateKey  privateKey  =  RsaKeyUtil.getPrivateKey(keyStorePath, alias, password);
-        result = encryptData(sourceData , privateKey);
-        return result;
-    }
-    
-    /**
-     * 
-     * @Title: decryptData   
-     * @Description: (解密数据)   
-     * @param: @param sourceData
-     * @param: @param publicKey
-     * @param: @return      
-     * @return: String      
-     * @throws
-     */
-    public  static String  decryptData(String sourceData  ,  PublicKey  publicKey){
-        String  result = null;
-        byte[]  data  =  decryptByPublicKey(SecurityAlgorithmUtil.hexStringConvertToByteArray(sourceData), publicKey);
-        try {
-            result  =  new String(data , "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("字符集出现异常");
-        }
-        return result;
-    }
-    /**
-     * 
-     * @Title: decryptData   
-     * @Description: (解密数据)   
-     * @param: @param sourceData
-     * @param: @param certificateFilePath
-     * @param: @return      
-     * @return: String      
-     * @throws
-     */
-    public  static String  decryptData(String sourceData  ,  String  certificateFilePath){
-        String  result  = null;
-        PublicKey  publicKey  =  RsaKeyUtil.getPublicKey(certificateFilePath);
-        result  =  decryptData(sourceData  ,  publicKey);
-        return result;
-    }
     
     /**
      * 
@@ -296,5 +143,292 @@ public class RsaEncrypt {
         length = prim.toString(2).length()/8;
         
         return length;
+    }
+    /**
+     * 
+     * @Title: encryptByPrivateKey   
+     * @Description: (通过密钥加密数据)   
+     * @param: @param sourceData
+     * @param: @param privateKey
+     * @param: @return      
+     * @return: byte[]      
+     * @throws
+     */
+    public static  byte[]  encryptByPrivateKey(byte[]  sourceData  ,  PrivateKey  privateKey){
+        byte[]  result = null;
+        
+        try {
+            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+            int blockSize = getPrivateKeySize(privateKey) -11;
+            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
+                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
+                result = concatByteArray(temp, result);
+            }
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("获取加密对象出现异常");
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+            throw new RuntimeException("校验秘钥出现异常");
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("加密数据出现异常");
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("加密数据出现异常");
+        }
+        return result;
+    }
+    
+    /**
+     * 
+     * @Title: decryptByPublicKey   
+     * @Description: (通过公钥解密数据)   
+     * @param: @param sourceData
+     * @param: @param publicKey
+     * @param: @return      
+     * @return: byte[]      
+     * @throws
+     */
+    public  static  byte[]  decryptByPublicKey(byte[]  sourceData  ,  PublicKey  publicKey){
+        byte[]  result  =  null;
+        try {
+            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.DECRYPT_MODE, publicKey);
+            int blockSize = getPublicKeySize(publicKey);
+            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
+                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
+                result = concatByteArray(temp, result);
+            }
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("获取加密对象出现异常");
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+            throw new RuntimeException("校验秘钥出现异常");
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("加密数据出现异常");
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("加密数据出现异常");
+        }
+        return result;
+    }
+    /**
+     * 
+     * @Title: encryptByPublicKey   
+     * @Description: (公钥加密数据--对应私钥解密数据)   
+     * @param: @param sourceData
+     * @param: @param publicKey
+     * @param: @return      
+     * @return: byte[]      
+     * @throws
+     */
+    public  static  byte[]  encryptByPublicKey(byte[]  sourceData  ,  PublicKey  publicKey){
+        byte[]  result  = null;
+        try {
+            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            int blockSize = getPublicKeySize(publicKey) -11;
+            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
+                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
+                result = concatByteArray(temp, result);
+            }
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public  static  byte[]  decryptByPrivateKey(byte[]  sourceData  ,  PrivateKey  privateKey){
+        byte[]  result = null;
+        
+        try {
+            Cipher  cipher  = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            int blockSize = getPrivateKeySize(privateKey);
+            for(int i = 0 ; i<sourceData.length ; i+=blockSize){
+                byte[] temp = cipher.doFinal(getBlockByteArray(sourceData, i, i+blockSize));
+                result = concatByteArray(temp, result);
+            }
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return  result;
+    }
+    
+    /**
+     * 
+     * @Title: encryptData   
+     * @Description: (加密数据)   
+     * @param: @param sourceData
+     * @param: @param privateKey
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  encryptData(String  sourceData , PrivateKey privateKey){
+        String  result = null;
+        byte[] data = null;
+        try {
+            data = encryptByPrivateKey(sourceData.getBytes(RsaConstant.CHAR_SET_DEF) , privateKey);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("字符集出现异常");
+        }
+        result  =  SecurityAlgorithmUtil.byteArrayConvertToHexString(data);
+        return result;
+    }
+    
+    /**
+     * 
+     * @Title: encryptData   
+     * @Description: (从本地密钥库获取密钥加密数据)   
+     * @param: @param sourceData
+     * @param: @param keyStorePath
+     * @param: @param alias
+     * @param: @param password
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  encryptData(String  sourceData ,String  keyStorePath , String alias ,  String password){
+        String  result = null;
+        PrivateKey  privateKey  =  RsaKeyUtil.getPrivateKey(keyStorePath, alias, password);
+        result = encryptData(sourceData , privateKey);
+        return result;
+    }
+    
+    /**
+     * 
+     * @Title: encryptData   
+     * @Description: (公钥加密数据)   
+     * @param: @param sourceData
+     * @param: @param publicKey
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static  String  encryptData(String  sourceData , PublicKey  publicKey){
+        String  result = null;
+        byte[] data = null;
+        try {
+            data = encryptByPublicKey(sourceData.getBytes(RsaConstant.CHAR_SET_DEF) , publicKey);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("字符集出现异常");
+        }
+        result  =  SecurityAlgorithmUtil.byteArrayConvertToHexString(data);
+        return result;
+    }
+    /**
+     * 
+     * @Title: encryptData   
+     * @Description: (通过获取证书加密数据)   
+     * @param: @param sourceData
+     * @param: @param certificateFilePath
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  encryptData(String sourceData  ,  String  certificateFilePath){
+        String  result  = null;
+        PublicKey  publicKey  =  RsaKeyUtil.getPublicKey(certificateFilePath);
+        result  =  encryptData(sourceData  ,  publicKey);
+        return result;
+    }
+    
+    
+    /**
+     * 
+     * @Title: decryptData   
+     * @Description: (解密数据)   
+     * @param: @param sourceData
+     * @param: @param publicKey
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  decryptData(String sourceData  ,  PublicKey  publicKey){
+        String  result = null;
+        byte[]  data  =  decryptByPublicKey(SecurityAlgorithmUtil.hexStringConvertToByteArray(sourceData), publicKey);
+        try {
+            result  =  new String(data , RsaConstant.CHAR_SET_DEF);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("字符集出现异常");
+        }
+        return result;
+    }
+    /**
+     * 
+     * @Title: decryptData   
+     * @Description: (解密数据)   
+     * @param: @param sourceData
+     * @param: @param certificateFilePath
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  decryptData(String sourceData  ,  String  certificateFilePath){
+        String  result  = null;
+        PublicKey  publicKey  =  RsaKeyUtil.getPublicKey(certificateFilePath);
+        result  =  decryptData(sourceData  ,  publicKey);
+        return result;
+    }
+    
+    /**
+     * 
+     * @Title: decryptData   
+     * @Description: (私钥加密数据)   
+     * @param: @param sourceData
+     * @param: @param privateKey
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  decryptData(String sourceData  ,  PrivateKey  privateKey){
+        String  result = null;
+        byte[]  data  =  decryptByPrivateKey(SecurityAlgorithmUtil.hexStringConvertToByteArray(sourceData), privateKey);
+        try {
+            result  =  new String(data , RsaConstant.CHAR_SET_DEF);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("字符集出现异常");
+        }
+        return result;
+    }
+    
+    /**
+     * 
+     * @Title: decryptData   
+     * @Description: (通过本地私钥解密数据)   
+     * @param: @param sourceData
+     * @param: @param keyStorePath
+     * @param: @param alias
+     * @param: @param password
+     * @param: @return      
+     * @return: String      
+     * @throws
+     */
+    public  static String  decryptData(String  sourceData ,String  keyStorePath , String alias ,  String password){
+        String  result = null;
+        PrivateKey  privateKey  =  RsaKeyUtil.getPrivateKey(keyStorePath, alias, password);
+        result = decryptData(sourceData , privateKey);
+        return result;
     }
 }
