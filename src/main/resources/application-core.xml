@@ -20,17 +20,14 @@ http://cxf.apache.org/schemas/jaxws.xsd">
     
     <context:component-scan base-package="com.beta.**.service" />
     
-    <bean id="payconcrete"  class="com.beta.api.service.impl.PaymentInterfaceImpl"></bean>
-    <jaxrs:server id="paymentInterface" address="/api" >
+    <jaxrs:server id="workPlatformService" address="/api" >
         <jaxrs:serviceBeans>
-            <ref bean="payconcrete"></ref>
-        </jaxrs:serviceBeans><!-- 
+            <ref bean="workPlatformServiceImp"></ref>
+        </jaxrs:serviceBeans>
        <jaxrs:outInterceptors>
-           <ref bean="outMessageInterceptor"></ref>
        </jaxrs:outInterceptors>
        <jaxrs:inInterceptors>
-           <ref bean="paymentInterceptor"></ref>
-       </jaxrs:inInterceptors> -->
+       </jaxrs:inInterceptors> 
     
     <!-- 配置cxf 请求日志输出 -->
        <jaxrs:features>
@@ -38,5 +35,36 @@ http://cxf.apache.org/schemas/jaxws.xsd">
        </jaxrs:features>
 
     </jaxrs:server>
+    
+    
+<!--     <bean id="batchPushTask" class="com.beta.api.task.BatchPushTask"></bean>
+    
+    <bean id="myJobDetailA"  class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="batchPushTask"> </property>
+        <property name="targetMethod" value="pushBatch"></property>
+        <property name="concurrent" value="false" />
+        是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程
+    </bean> -->
 
+    <!-- <bean id="myTriggersA"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="myJobDetailA">
+        </property>
+        <property name="cronExpression">
+            <value>0 */2 * * * ?</value>
+        </property>
+    </bean> -->
+    
+<!--     <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">  
+        <property name="jobDetail" ref="myJobDetailA" />  
+        <property name="startDelay" value="0" />调度工厂实例化后，经过0秒开始执行调度  
+        <property name="repeatInterval" value="2000" />每2秒调度一次  
+    </bean>  
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger"/>
+            </list>
+        </property>
+    </bean> -->
 </beans>

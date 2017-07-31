@@ -1,4 +1,4 @@
-package com.beta.encrypt.aes;
+package com.beta.prop.encrypt.aes;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -10,7 +10,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import com.beta.encrypt.util.SecurityAlgorithmUtil;
+import com.beta.prop.encrypt.util.SecurityAlgorithmUtil;
+
 
 /**
  * 

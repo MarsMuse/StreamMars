@@ -1,8 +1,6 @@
-package com.beta.encrypt.rsa;
+package com.beta.prop.encrypt.rsa;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -12,11 +10,12 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.util.Enumeration;
 
 /**
  * 
  * @ClassName:  RsaKeyUtil   
- * @Description:TODO(获取到RSA秘钥工具)   
+ * @Description:(获取到RSA秘钥工具)   
  * @author: FireMonkey
  * @date:   2017年7月10日 上午10:53:30   
  *     
@@ -47,6 +46,7 @@ public class RsaKeyUtil {
             store.load(fis, password.toCharArray());
             //获取到秘钥
             privateKey  =  (PrivateKey) store.getKey(alias, password.toCharArray());
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException("密钥库路径出现异常");
@@ -81,17 +81,86 @@ public class RsaKeyUtil {
     
     /**
      * 
+     * @Title: getPrivateKey   
+     * @Description:(根据证书路径获取到私钥)   
+     * @param: @param certificatePath
+     * @param: @param password
+     * @param: @return      
+     * @return: PrivateKey      
+     * @throws
+     */
+    public  static  PrivateKey  getPrivateKey(String  pfxPath  ,  String  password){
+    	PrivateKey  privateKey  =  null;
+    	
+        InputStream  keyInput  = null;
+
+        try {
+            keyInput  =  new FileInputStream(pfxPath);
+            privateKey  =  getPrivateKey(keyInput ,password );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return  privateKey;
+    }
+
+    /**
+     *
+     * @Title: getPrivateKey
+     * @Description:(根据证书路径获取到私钥)
+     * @param: @param certificatePath
+     * @param: @param password
+     * @param: @return
+     * @return: PrivateKey
+     * @throws
+     */
+    public  static  PrivateKey  getPrivateKey(InputStream keyInput  ,  String  password){
+        PrivateKey  privateKey  =  null;
+        KeyStore  keyStore =  null;
+
+        try {
+            //密钥库
+            keyStore = KeyStore.getInstance(RsaConstant.KEY_STORE_BY_PRIVATE);
+            //密码字符数组
+            char[]  passwordArray  =  password.toCharArray();
+            keyStore.load(keyInput , passwordArray);
+
+            Enumeration aliasEnum  =  keyStore.aliases();
+            String  alias  =  null;
+            if(aliasEnum.hasMoreElements()){
+                alias = (String) aliasEnum.nextElement();
+            }
+            privateKey  = (PrivateKey) keyStore.getKey(alias , passwordArray);
+
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnrecoverableKeyException e) {
+            e.printStackTrace();
+        }
+
+        return  privateKey;
+
+    }
+    
+    /**
+     * 
      * @Title: getPublicKey   
-     * @Description: TODO(从证书中获取公钥)   
+     * @Description:(从证书中获取公钥)   
      * @param: @param certificatePath
      * @param: @return      
      * @return: PublicKey      
      * @throws
      */
     public  static  PublicKey  getPublicKey(String  certificatePath){
-        PublicKey  publicKey  =  null;
+        PublicKey  publicKey  = null;
         
-        CertificateFactory  certificateFactory = null;
+        CertificateFactory  certificateFactory ;
         
         FileInputStream  fis = null;
         try {

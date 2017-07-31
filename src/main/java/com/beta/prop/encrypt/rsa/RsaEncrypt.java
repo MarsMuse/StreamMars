@@ -1,4 +1,5 @@
-package com.beta.encrypt.rsa;
+package com.beta.prop.encrypt.rsa;
+
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -16,7 +17,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import com.beta.encrypt.util.SecurityAlgorithmUtil;
+import com.beta.prop.encrypt.util.SecurityAlgorithmUtil;
+
 
 /**
  * 
@@ -158,7 +160,7 @@ public class RsaEncrypt {
         byte[]  result = null;
         
         try {
-            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            Cipher  cipher = Cipher.getInstance(RsaConstant.RSA_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, privateKey);
             int blockSize = getPrivateKeySize(privateKey) -11;
             for(int i = 0 ; i<sourceData.length ; i+=blockSize){
@@ -194,7 +196,7 @@ public class RsaEncrypt {
     public  static  byte[]  decryptByPublicKey(byte[]  sourceData  ,  PublicKey  publicKey){
         byte[]  result  =  null;
         try {
-            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            Cipher  cipher = Cipher.getInstance(RsaConstant.RSA_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, publicKey);
             int blockSize = getPublicKeySize(publicKey);
             for(int i = 0 ; i<sourceData.length ; i+=blockSize){
@@ -229,7 +231,7 @@ public class RsaEncrypt {
     public  static  byte[]  encryptByPublicKey(byte[]  sourceData  ,  PublicKey  publicKey){
         byte[]  result  = null;
         try {
-            Cipher  cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            Cipher  cipher = Cipher.getInstance(RsaConstant.RSA_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             int blockSize = getPublicKeySize(publicKey) -11;
             for(int i = 0 ; i<sourceData.length ; i+=blockSize){
@@ -252,7 +254,7 @@ public class RsaEncrypt {
         byte[]  result = null;
         
         try {
-            Cipher  cipher  = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            Cipher  cipher  = Cipher.getInstance(RsaConstant.RSA_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             int blockSize = getPrivateKeySize(privateKey);
             for(int i = 0 ; i<sourceData.length ; i+=blockSize){

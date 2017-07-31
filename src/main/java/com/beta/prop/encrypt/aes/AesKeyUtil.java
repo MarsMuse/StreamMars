@@ -1,4 +1,4 @@
-package com.beta.encrypt.aes;
+package com.beta.prop.encrypt.aes;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
@@ -8,7 +8,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.beta.encrypt.util.SecurityAlgorithmUtil;
+import com.beta.prop.encrypt.util.SecurityAlgorithmUtil;
+
 
 /**
  * 

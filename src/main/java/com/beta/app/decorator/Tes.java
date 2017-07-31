@@ -5,7 +5,9 @@ import java.util.Random;
 
 import javax.xml.bind.DatatypeConverter;
 
-import com.beta.encrypt.util.SecurityAlgorithmUtil;
+import com.beta.prop.encrypt.util.SecurityAlgorithmUtil;
+
+
 
 
 
@@ -13,7 +15,7 @@ public class Tes {
     
     public static void main(String[] args) {
     	
-        String  message = "测试信息假币00011---额12112312121";
+        /*String  message = "测试信息假币00011---额12112312121";
         char[] bufer = message.toCharArray();
         int len  = bufer.length;
         Random  ran =  new Random();
@@ -28,7 +30,9 @@ public class Tes {
         System.out.println(encdoe.equals(encdoea));
         System.out.println(encdoe.length());
         String  a = SecurityAlgorithmUtil.base64Decode(encdoe);
-        System.out.println(a);
+        System.out.println(a);*/
+    	
+    	System.out.println( String.valueOf(System.currentTimeMillis()).substring(1));
     }
     
     public static String  base64Encode(String  message) throws UnsupportedEncodingException{

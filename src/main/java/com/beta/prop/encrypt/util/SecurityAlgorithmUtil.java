@@ -1,4 +1,4 @@
-package com.beta.encrypt.util;
+package com.beta.prop.encrypt.util;
 
 import java.io.UnsupportedEncodingException;
 

@@ -1,9 +1,9 @@
-package com.beta.encrypt.aes;
+package com.beta.prop.encrypt.aes;
 
 /**
  * 
  * @ClassName:  AesConstant   
- * @Description:TODO(AES加密/解密常量)   
+ * @Description:(AES加密/解密常量)
  * @author: zouyao
  * @date:   2017年7月12日 上午10:02:41   
  *     
